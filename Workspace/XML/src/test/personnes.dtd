@@ -1,0 +1,17 @@
+<!ELEMENT personnes (personne+)>
+	<!ATTLIST personne id ID #REQUIRED>
+	<!ATTLIST personne id ID #REQUIRED>
+	<!ATTLIST personne civ (homme|femme|nc) #REQUIRED>
+	
+<!ELEMENT personne (prenom,nom,mails,tels?)>
+<!ELEMENT nom (#PCDATA)>
+<!ELEMENT prenom (#PCDATA)>
+<!ELEMENT mails (mail*)>
+<!ELEMENT mail (#PCDATA)>
+<!ELEMENT tels (tel+)>
+<!ELEMENT tel (#PCDATA)>
+
+
+<!ATTLIST mail type (pro|perso) #REQUIRED>
+<!ATTLIST tel type (pro|perso) #REQUIRED>
+

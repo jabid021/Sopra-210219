@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+
+<!--<!DOCTYPE personnes SYSTEM  "personnes.dtd"> -->
+
+<personnes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="personnes.xsd"> 
+
+	<personne id="p12" civ="femme">
+		<prenom>Jordan</prenom>
+		<nom>Abid</nom>
+		<mails>
+			<mail type="perso">jordanabid@gmail.com</mail>
+			<mail type="pro">j.abid@ajc-ingenierie.fr</mail>
+		</mails>
+		<tels>
+			<tel type="perso">0665274226</tel>
+		</tels>
+	</personne>
+
+	<personne id="p12" civ="homme">
+		<prenom>Jeremy</prenom>
+		<nom>Abid</nom>
+		<mails/>
+		
+	</personne>
+	
+
+</personnes>
+

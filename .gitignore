@@ -1,1 +1,6 @@
-Workspace/
+*.metadata/
+*/bin/
+*.classpath
+*.project
+*.settings/
+*.class
