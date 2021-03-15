@@ -1,6 +1,4 @@
 
 *.classpath
 *target/
-*.settings/
-.project
 .metadata
