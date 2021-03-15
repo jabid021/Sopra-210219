@@ -5,28 +5,22 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.ObjectInputStream.GetField;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
-import dao.DAOCompte;
-import dao.DAOPatient;
-import dao.DAOVisite;
 import metier.Adresse;
 import metier.Compte;
+import metier.Hopital;
 import metier.Medecin;
 import metier.Patient;
 import metier.Secretaire;
 import metier.Visite;
 
 public class App {
-	static LinkedList<Patient> fileAttente=new LinkedList<Patient>();
-	static Patient lastPatient=null;
-	static Compte connected=null;
-	static DAOCompte daoC = new DAOCompte();
-	static DAOPatient daoP = new DAOPatient();
-	static DAOVisite daoV = new DAOVisite();
-	static boolean pause=false;
+
+	
 	public static String saisieString(String msg) 
 	{
 		Scanner sc=new Scanner(System.in);
@@ -59,11 +53,13 @@ public class App {
 		String login=saisieString("Saisir votre login");
 		String password=saisieString("Saisir votre password");
 
-		connected = daoC.checkConnect(login, password);
-
+		Compte connected=Hopital.get_instance().getDaoC().checkConnect(login, password);
+		
+		Hopital.get_instance().setConnected(connected);
+		
 		if(connected==null) {System.out.println("Identifiants invalides");accueil();}
 		else {
-			if(connected instanceof Medecin){menuMedecin();}
+			if(connected instanceof Medecin){((Medecin) connected).setSalle(saisieInt("choisir votre salle (1 ou 2)")); menuMedecin();}
 			else if(connected instanceof Secretaire){menuSecretaire();}
 			else {System.out.println("Error type de compte");}
 		}
@@ -71,6 +67,8 @@ public class App {
 
 	public static void menuSecretaire() {
 		System.out.println("Menu Secretaire \n");
+		boolean pause=Hopital.get_instance().isPause();
+		
 		if(!pause) 
 		{
 			System.out.println("1 - Ajouter un patient");
@@ -116,7 +114,7 @@ public class App {
 	public static void addPatient() {
 		int secu=saisieInt("Saisir votre numéro de secu");
 
-		Patient p = daoP.findById(secu);
+		Patient p = Hopital.get_instance().getDaoP().findById(secu);
 
 		if(p==null) 
 		{
@@ -131,9 +129,9 @@ public class App {
 			String ville = saisieString("Saisir votre ville");
 
 			p=new Patient(secu,nom,prenom,tel,new Adresse(numero,voie,cp,ville));	 
-			daoP.insert(p);
+			Hopital.get_instance().getDaoP().insert(p);
 		}
-		fileAttente.add(p);
+		Hopital.get_instance().getFileAttente().add(p);
 	}
 
 	public static void menuMedecin() {
@@ -156,16 +154,19 @@ public class App {
 	}
 
 	private static void showPatients() {
-		if(fileAttente.isEmpty()) {System.out.println("Aucun patient dans l'hopital");}
-		fileAttente.forEach(patient -> {System.out.println(patient);});
+		if(Hopital.get_instance().getFileAttente().isEmpty()) {System.out.println("Aucun patient dans l'hopital");}
+		Hopital.get_instance().getFileAttente().forEach(patient -> {System.out.println(patient);});
+		//for(Patient patient : Hopital.get_instance().getFileAttente()) {System.out.println(patient);}
 	}
 
 	public static void recevoir()
 	{
-		if(!fileAttente.isEmpty()) 
+		if(!Hopital.get_instance().getFileAttente().isEmpty()) 
 		{
-			Patient p=fileAttente.poll();
-
+			Patient p=Hopital.get_instance().getFileAttente().poll();
+			Patient lastPatient= Hopital.get_instance().getLastPatient();
+			Compte connected=Hopital.get_instance().getConnected();
+			
 			if(lastPatient!=null) 
 			{
 				System.out.println("Fin du rdv pour : "+lastPatient);
@@ -188,7 +189,7 @@ public class App {
 
 	public static void saveVisites() 
 	{
-		List<Visite> visites = ((Medecin) connected).getVisites();
+		List<Visite> visites = ((Medecin) Hopital.get_instance().getConnected()).getVisites();
 		if(visites.isEmpty()) 
 		{
 			System.out.println("Pas de visite a sauvegarder");
@@ -197,7 +198,7 @@ public class App {
 
 			for(Visite v : visites) 
 			{
-				daoV.insert(v);
+				Hopital.get_instance().getDaoV().insert(v);
 			}
 
 			System.out.println("La liste est save");	
@@ -212,11 +213,11 @@ public class App {
 		try {
 			FileOutputStream fos = new FileOutputStream(file);
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
-			oos.writeObject(fileAttente);
+			oos.writeObject(Hopital.get_instance().getFileAttente());
 			oos.close();
 			fos.close();
-			fileAttente.clear();
-			pause=true;
+			Hopital.get_instance().getFileAttente().clear();
+			Hopital.get_instance().setPause(true);
 			System.out.println("La secretaire part en pause, la file d'attente est vide !");
 		}catch(Exception e) 
 		{System.out.println("La liste n'a pas été save, impossible d'aller en pause !");}
@@ -228,9 +229,9 @@ public class App {
 		try {
 			FileInputStream fis = new FileInputStream(file);
 			ObjectInputStream ois = new ObjectInputStream(fis);
-			fileAttente = (LinkedList<Patient>) ois.readObject();
+			Hopital.get_instance().setFileAttente((LinkedList<Patient>) ois.readObject());
 			System.out.println("La secretaire revient de pause, toute la file a été TP");
-			pause=false;
+			Hopital.get_instance().setPause(false);
 			ois.close();
 			fis.close();
 
@@ -238,10 +239,9 @@ public class App {
 	}
 
 
-
 	public static void showVisite(int secu) 
 	{
-		List<Visite> visitesPatient = daoV.selectAllByPatient(secu);
+		List<Visite> visitesPatient = Hopital.get_instance().getDaoV().selectAllByPatient(secu);
 		if(visitesPatient.isEmpty()) 
 		{
 			System.out.println("Aucune visite pour ce patient");
@@ -254,6 +254,9 @@ public class App {
 			}
 		}
 	}
+	
+	
+	
 	public static void main(String[] args) {
 		accueil();	
 	}

@@ -1,4 +1,4 @@
-package dao;
+package dao.jdbc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,15 +7,16 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import dao.IDAOVisite;
 import metier.Medecin;
 import metier.Patient;
 import metier.Visite;
 
 
-public class DAOVisite implements IDAO<Visite,Integer>{
+public class DAOVisiteJDBC implements IDAOVisite{
 
-	private static DAOPatient daoPatient= new DAOPatient();
-	private static DAOCompte daoCompte= new DAOCompte();
+	private static DAOPatientJDBC daoPatient= new DAOPatientJDBC();
+	private static DAOCompteJDBC daoCompte= new DAOCompteJDBC();
 
 	@Override
 	public Visite findById(Integer id) {

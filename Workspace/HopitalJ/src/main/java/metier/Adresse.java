@@ -6,7 +6,9 @@ public class Adresse implements Serializable{
 
 	
 	private int numero;
-	private String voie,cp,ville;
+	private String voie;
+	private String cp;
+	private String ville;
 	
 	
 	public Adresse(int numero, String voie, String cp, String ville) {

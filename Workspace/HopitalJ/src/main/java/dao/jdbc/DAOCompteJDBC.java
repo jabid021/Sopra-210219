@@ -1,4 +1,4 @@
-package dao;
+package dao.jdbc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,12 +7,14 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import dao.IDAO;
+import dao.IDAOCompte;
 import metier.Compte;
 import metier.Medecin;
 import metier.Secretaire;
 
 
-public class DAOCompte implements IDAO<Compte,Integer>{
+public class DAOCompteJDBC implements IDAOCompte{
 
 	@Override
 	public Compte findById(Integer id) {
@@ -162,7 +164,7 @@ public class DAOCompte implements IDAO<Compte,Integer>{
 	}
 
 
-
+	@Override
 	public Compte checkConnect(String log,String pass) {
 		Compte compte= null;
 		try {
