@@ -84,7 +84,6 @@ public class DAOVisiteJDBC implements IDAOVisite{
 	}
 
 
-
 	@Override
 	public void insert(Visite visite) {
 		try {
