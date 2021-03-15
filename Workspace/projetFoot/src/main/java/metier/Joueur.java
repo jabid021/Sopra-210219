@@ -3,14 +3,13 @@ package metier;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.OrderColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 //REQUIRED
@@ -18,15 +17,15 @@ import javax.persistence.Table;
 //OPTION
 @Table(name="player")
 //REQUIRED
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 //OPTION
-@DiscriminatorColumn(name="poste",columnDefinition = "VARCHAR(3)")
-public abstract class Joueur {
+//@DiscriminatorColumn(name="poste",columnDefinition = "VARCHAR(3)")
+public class Joueur {
 
 	//REQUIRED
 	@Id
 	//~OPTION
-	@GeneratedValue(strategy = GenerationType.TABLE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	//OPTION
 	@Column(name="identifiant")
 	private int id;
@@ -43,15 +42,33 @@ public abstract class Joueur {
 	@Column(name="birthdate")
 	private LocalDate naissance;
 	
+	@Enumerated(EnumType.STRING)
+	private Poste poste;
 	//REQUIRED
+	
+	@OneToOne
+	private Stats statistiques;
+	
+	
+
+	
 	public Joueur() {
 	}
 
 
-	public Joueur(String nom, String prenom, String naissance) {
+	public Joueur(String nom, String prenom, String naissance,Poste poste) {
 		this.nom = nom;
 		this.prenom = prenom;
 		this.naissance = LocalDate.parse(naissance);
+		this.poste=poste;
+	}
+	
+	public Joueur(String nom, String prenom, String naissance,Poste poste,Stats statistiques) {
+		this.nom = nom;
+		this.prenom = prenom;
+		this.naissance = LocalDate.parse(naissance);
+		this.poste=poste;
+		this.statistiques=statistiques;
 	}
 
 
@@ -94,11 +111,38 @@ public abstract class Joueur {
 		this.naissance = naissance;
 	}
 
+	
+
+	public Poste getPoste() {
+		return poste;
+	}
+
+
+	public void setPoste(Poste poste) {
+		this.poste = poste;
+	}
+
+
+	public Stats getStatistiques() {
+		return statistiques;
+	}
+
+
+	public void setStatistiques(Stats statistiques) {
+		this.statistiques = statistiques;
+	}
+
 
 	@Override
 	public String toString() {
-		return "Joueur [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", naissance=" + naissance + "]";
+		return "Joueur [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", naissance=" + naissance + ", poste="
+				+ poste + ", statistiques=" + statistiques + "]";
 	}
+
+
+
+	
+
 	
 	
 	
