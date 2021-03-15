@@ -2,20 +2,48 @@ package metier;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.OrderColumn;
+import javax.persistence.Table;
 
+//REQUIRED
 @Entity
-public class Joueur {
+//OPTION
+@Table(name="player")
+//REQUIRED
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+//OPTION
+@DiscriminatorColumn(name="poste",columnDefinition = "VARCHAR(3)")
+public abstract class Joueur {
 
-	
+	//REQUIRED
 	@Id
+	//~OPTION
+	@GeneratedValue(strategy = GenerationType.TABLE)
+	//OPTION
+	@Column(name="identifiant")
 	private int id;
+	
+	//OPTION
+	@Column(name="name",columnDefinition = "VARCHAR(70)",nullable = false)
 	private String nom;
+	
+	//OPTION
+	@Column(name="firstname",nullable = false)
 	private String prenom;
+	
+	//OPTION
+	@Column(name="birthdate")
 	private LocalDate naissance;
 	
-	
+	//REQUIRED
 	public Joueur() {
 	}
 
