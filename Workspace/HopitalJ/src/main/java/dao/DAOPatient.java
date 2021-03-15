@@ -21,7 +21,7 @@ public class DAOPatient implements IDAO<Patient,Integer>{
 			Class.forName("com.mysql.jdbc.Driver");
 
 			Connection conn=DriverManager.getConnection(chemin,login,password);
-			PreparedStatement ps = conn.prepareStatement("Select * from patient where id=?");
+			PreparedStatement ps = conn.prepareStatement("Select * from patient where secu=?");
 			ps.setInt(1,id);
 			ResultSet rs = ps.executeQuery();
 
@@ -87,10 +87,15 @@ public class DAOPatient implements IDAO<Patient,Integer>{
 
 			Connection conn=DriverManager.getConnection(chemin,login,password);
 
-			PreparedStatement ps = conn.prepareStatement("INSERT INTO patient (id,nom,prenom) VALUES(?,?,?)");
+			PreparedStatement ps=conn.prepareStatement("INSERT INTO patient (secu,nom,prenom,tel,numero,voie,cp,ville) VALUES (?,?,?,?,?,?,?,?)"); 			ps.setInt(1,patient.getId());
 			ps.setInt(1,patient.getId());
-			ps.setString(2,patient.getNom());
+			ps.setString(2, patient.getNom());
 			ps.setString(3,patient.getPrenom());
+			ps.setString(4,patient.getTel());
+			ps.setInt(5, patient.getAdresse().getNumero());
+			ps.setString(6,patient.getAdresse().getVoie());
+			ps.setString(7,patient.getAdresse().getCp());
+			ps.setString(8 ,patient.getAdresse().getVille());
 
 			ps.executeUpdate();
 
@@ -111,12 +116,12 @@ public class DAOPatient implements IDAO<Patient,Integer>{
 
 			Connection conn=DriverManager.getConnection(chemin,login,password);
 
-			PreparedStatement ps = conn.prepareStatement("UPDATE patient set nom=?,prenom=? where id=?");
+			PreparedStatement ps = conn.prepareStatement("UPDATE patient set nom=?,prenom=? where secu=?");
 
-			ps.setString(1,patient.getNom());
+			
+			ps.setString(1, patient.getNom());
 			ps.setString(2,patient.getPrenom());
 			ps.setInt(3,patient.getId());
-
 			ps.executeUpdate();
 
 			ps.close();
@@ -134,7 +139,7 @@ public class DAOPatient implements IDAO<Patient,Integer>{
 
 			Connection conn=DriverManager.getConnection(chemin,login,password);
 
-			PreparedStatement ps = conn.prepareStatement("DELETE FROM patient where id=?");
+			PreparedStatement ps = conn.prepareStatement("DELETE FROM patient where secu=?");
 			ps.setInt(1,patient.getId());
 
 			ps.executeUpdate();

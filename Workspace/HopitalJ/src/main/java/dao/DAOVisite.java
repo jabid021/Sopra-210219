@@ -160,4 +160,38 @@ public class DAOVisite implements IDAO<Visite,Integer>{
 
 
 
+	public List<Visite> selectAllByPatient(int secu) {
+		List<Visite> visites= new ArrayList();
+		Visite visite=null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+
+			Connection conn=DriverManager.getConnection(chemin,login,password);
+			PreparedStatement ps = conn.prepareStatement("Select * from visite where id_patient=?");
+			ps.setInt(1, secu);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) 
+			{
+				int id=rs.getInt("id");
+				Patient patient = daoPatient.findById(rs.getInt("id_patient"));
+				Medecin medecin = (Medecin) daoCompte.findById(rs.getInt("id_medecin"));
+				double prix=rs.getDouble("prix");
+				String date = rs.getString("date_visite");
+				int salle = rs.getInt("salle");
+
+				visite=new Visite(id,patient,medecin,prix, date,salle);	
+				visites.add(visite);
+			}
+			rs.close();
+			ps.close();
+			conn.close();	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return visites;
+	}
+
+
+
 }

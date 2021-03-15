@@ -1,11 +1,12 @@
 package metier;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Medecin extends Compte {
 
 	private int salle;
-	private List<Visite> visites;
+	private List<Visite> visites=new ArrayList();
 
 	public Medecin() {
 	}
