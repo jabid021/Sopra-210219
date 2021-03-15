@@ -3,13 +3,14 @@ package metier;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 //REQUIRED
@@ -46,10 +47,14 @@ public class Joueur {
 	private Poste poste;
 	//REQUIRED
 	
-	@OneToOne
+	@Embedded
 	private Stats statistiques;
 	
+	@Embedded
+	private Adresse adresse;
 	
+	@ManyToOne
+	private Equipe equipe;
 
 	
 	public Joueur() {
@@ -133,11 +138,32 @@ public class Joueur {
 	}
 
 
+	public Adresse getAdresse() {
+		return adresse;
+	}
+
+
+	public void setAdresse(Adresse adresse) {
+		this.adresse = adresse;
+	}
+
+
+	public Equipe getEquipe() {
+		return equipe;
+	}
+
+
+	public void setEquipe(Equipe equipe) {
+		this.equipe = equipe;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Joueur [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", naissance=" + naissance + ", poste="
-				+ poste + ", statistiques=" + statistiques + "]";
+				+ poste + ", statistiques=" + statistiques + ", adresse=" + adresse + "]";
 	}
+
 
 
 

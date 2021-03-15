@@ -1,24 +1,19 @@
 package metier;
 
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-@Entity
+@Embeddable
 public class Stats {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+
 	private int vitesse;
 	private int attaque;
 	private int defense;
-	
-	@OneToOne(mappedBy = "statistiques")
-	private Joueur joueur;
-	
 	
 	public Stats() {
 	}
@@ -29,13 +24,6 @@ public class Stats {
 		this.defense = defense;
 	}
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public int getVitesse() {
 		return vitesse;
@@ -63,8 +51,9 @@ public class Stats {
 
 	@Override
 	public String toString() {
-		return "Stats [id=" + id + ", vitesse=" + vitesse + ", attaque=" + attaque + ", defense=" + defense + "]";
+		return "Stats [vitesse=" + vitesse + ", attaque=" + attaque + ", defense=" + defense + "]";
 	}
+
 	
 	
 	
