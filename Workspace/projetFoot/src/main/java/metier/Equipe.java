@@ -2,10 +2,12 @@ package metier;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -17,10 +19,12 @@ public class Equipe {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id_equipe")
 	private int id;
 	private String nom;
 	
 	@OneToOne
+	@JoinColumn(name="capitaine")
 	private Joueur capitaine;
 	
 	@OneToMany(mappedBy = "equipe")
