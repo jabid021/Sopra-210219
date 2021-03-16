@@ -1,10 +1,13 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -17,14 +20,17 @@ public class Client extends Personne {
 	@Column(name="birthdate")
 	private LocalDate naissance;
 	
-	@ManyToMany
+	//fetch sur une liste vaut Lazy par default, ne sert a rien de le preciser dans notre cas ! 
+	
+	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	@JoinTable(
 			name="achats",
 			joinColumns = @JoinColumn(name="id_client"),
 			inverseJoinColumns = @JoinColumn(name="id_produit")
 			)
 	
-	private List<Produit> produits;
+	
+	private List<Produit> produits=new ArrayList();
 	
 	
 	public Client() {

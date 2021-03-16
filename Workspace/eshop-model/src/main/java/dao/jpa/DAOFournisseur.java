@@ -4,49 +4,50 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import dao.IDAOJoueur;
-import metier.Joueur;
+import dao.IDAOFournisseur;
+import model.Fournisseur;
 import util.Context;
 
-public class DAOJoueur implements IDAOJoueur {
+public class DAOFournisseur implements IDAOFournisseur {
 
 	@Override
-	public Joueur findById(Integer id) {
+	public Fournisseur findById(Integer id) {
 		EntityManager em = Context.getInstance().getEmf().createEntityManager();
-		Joueur joueur = em.find(Joueur.class, id);
+		Fournisseur fournisseur = em.find(Fournisseur.class, id);
 		em.close();
-		return joueur;
+		return fournisseur;
 	}
 
 	@Override
-	public List<Joueur> findAll() {
+	public List<Fournisseur> findAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Joueur save(Joueur joueur) {
+	public Fournisseur save(Fournisseur fournisseur) {
 		EntityManager em = Context.getInstance().getEmf().createEntityManager();
 		em.getTransaction().begin();
-		joueur=em.merge(joueur);
+		fournisseur=em.merge(fournisseur);
 		
 		em.getTransaction().commit();
 		em.close();
-		return joueur;
+		return fournisseur;
 	}
 
 	@Override
-	public void delete(Joueur joueur) {
+	public void delete(Fournisseur fournisseur) {
 		
 		EntityManager em = Context.getInstance().getEmf().createEntityManager();
 		em.getTransaction().begin();
 		
-		joueur=em.merge(joueur);
-		em.remove(joueur);
+		fournisseur=em.merge(fournisseur);
+		em.remove(fournisseur);
 		
 		em.getTransaction().commit();
 		em.close();
 		
 	}
+
 
 }

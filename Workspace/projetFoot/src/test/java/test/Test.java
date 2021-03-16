@@ -10,9 +10,10 @@ public class Test {
 
 	public static void main(String[] args) {
 		
-		
+		Equipe e = new Equipe();
+		e.setNom("PSG");
 		Joueur joueur1 = new Joueur("Abid","Jordan","1993-05-01",Poste.AD,new Stats(70,68,80));
-		joueur1.setEquipe(new Equipe());
+		joueur1.setEquipe(e);
 		
 		
 		joueur1=Context.getInstance().getDaoJoueur().save(joueur1);

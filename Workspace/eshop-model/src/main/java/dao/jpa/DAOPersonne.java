@@ -4,49 +4,50 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import dao.IDAOJoueur;
-import metier.Joueur;
+import dao.IDAOPersonne;
+import model.Personne;
 import util.Context;
 
-public class DAOJoueur implements IDAOJoueur {
+public class DAOPersonne implements IDAOPersonne {
 
 	@Override
-	public Joueur findById(Integer id) {
+	public Personne findById(Integer id) {
 		EntityManager em = Context.getInstance().getEmf().createEntityManager();
-		Joueur joueur = em.find(Joueur.class, id);
+		Personne personne = em.find(Personne.class, id);
 		em.close();
-		return joueur;
+		return personne;
 	}
 
 	@Override
-	public List<Joueur> findAll() {
+	public List<Personne> findAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Joueur save(Joueur joueur) {
+	public Personne save(Personne personne) {
 		EntityManager em = Context.getInstance().getEmf().createEntityManager();
 		em.getTransaction().begin();
-		joueur=em.merge(joueur);
+		personne=em.merge(personne);
 		
 		em.getTransaction().commit();
 		em.close();
-		return joueur;
+		return personne;
 	}
 
 	@Override
-	public void delete(Joueur joueur) {
+	public void delete(Personne personne) {
 		
 		EntityManager em = Context.getInstance().getEmf().createEntityManager();
 		em.getTransaction().begin();
 		
-		joueur=em.merge(joueur);
-		em.remove(joueur);
+		personne=em.merge(personne);
+		em.remove(personne);
 		
 		em.getTransaction().commit();
 		em.close();
 		
 	}
+
 
 }

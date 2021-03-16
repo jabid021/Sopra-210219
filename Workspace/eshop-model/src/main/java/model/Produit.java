@@ -1,7 +1,9 @@
 package model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,8 +18,8 @@ public class Produit {
 	@Column(nullable = true)
 	private Double prix;
 	
-	
-	@ManyToOne
+	//fetch sur un attribut simple (!= d'une liste)  vaut eager par default, ne sert a rien de le preciser dans notre cas ! 
+	@ManyToOne(cascade = {CascadeType.MERGE,CascadeType.PERSIST},fetch = FetchType.EAGER)
 	private Fournisseur fournisseur;
 	
 	public Produit() {
@@ -53,6 +55,11 @@ public class Produit {
 
 	public void setFournisseur(Fournisseur fournisseur) {
 		this.fournisseur = fournisseur;
+	}
+
+	@Override
+	public String toString() {
+		return "Produit [id=" + id + ", libelle=" + libelle + ", prix=" + prix + ", fournisseur=" + fournisseur + "]";
 	}
 	
 	
