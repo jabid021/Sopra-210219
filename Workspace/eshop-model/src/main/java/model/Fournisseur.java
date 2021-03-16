@@ -11,7 +11,6 @@ public class Fournisseur extends Personne{
 	@Column(name="company")
 	private String societe;
 	
-	
 	public Fournisseur() {
 	}
 	

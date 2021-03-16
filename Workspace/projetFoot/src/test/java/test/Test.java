@@ -1,40 +1,50 @@
 package test;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-
+import metier.Equipe;
 import metier.Joueur;
 import metier.Poste;
 import metier.Stats;
+import util.Context;
 
 public class Test {
 
 	public static void main(String[] args) {
 		
-		Stats s = new Stats(88,92,94);
 		
-		Joueur j= new Joueur("Abid","Jordan","1993-05-01",Poste.DD,s);
-		
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("baseFoot");
-		EntityManager em = emf.createEntityManager();
-		
-		/*em.getTransaction().begin();
+		Joueur joueur1 = new Joueur("Abid","Jordan","1993-05-01",Poste.AD,new Stats(70,68,80));
+		joueur1.setEquipe(new Equipe());
 		
 		
-		em.persist(j);
+		joueur1=Context.getInstance().getDaoJoueur().save(joueur1);
+		
+		joueur1.setNaissance("1993-05-02");
+		Context.getInstance().getDaoJoueur().save(joueur1);
+		
+		Joueur j2=Context.getInstance().getDaoJoueur().findById(8);
 		
 		
-		em.getTransaction().commit();
+		Context.getInstance().getDaoJoueur().delete(j2);
+
 		
-		
-		System.out.println(em.find(Joueur.class, 1));
-		
-		*/
-		
-		em.close();
-		emf.close();
+	
+		Context.getInstance().closeEmf();
 
 	}
 
 }
+//Managed, soit detached/transient
+
+		//SelectOne -> em.find(Class,id) => Managed
+		//SelectAll => ? => Not Managed
+		/*
+		 * Update-> em.merge(object) => ~Managed
+		 * insert- em.persist(object) => Managed
+		 * delete em.remove(object) => Deleted
+		
+		em.getTransaction().begin();
+		em.persist(j2);//j => managed
+		//Joueur jManaged=em.merge(j);//j => pas managed par contre jManaged l'est !  => Equivalent de j=em.merge(j)
+	
+		em.getTransaction().commit();
+		 */
+		

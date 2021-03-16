@@ -1,9 +1,13 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Client extends Personne {
@@ -12,6 +16,16 @@ public class Client extends Personne {
 	private int age;
 	@Column(name="birthdate")
 	private LocalDate naissance;
+	
+	@ManyToMany
+	@JoinTable(
+			name="achats",
+			joinColumns = @JoinColumn(name="id_client"),
+			inverseJoinColumns = @JoinColumn(name="id_produit")
+			)
+	
+	private List<Produit> produits;
+	
 	
 	public Client() {
 	}
@@ -37,6 +51,20 @@ public class Client extends Personne {
 
 	public void setNaissance(String naissance) {
 		this.naissance = LocalDate.parse(naissance);
+	}
+	
+	
+
+	public List<Produit> getProduits() {
+		return produits;
+	}
+
+	public void setProduits(List<Produit> produits) {
+		this.produits = produits;
+	}
+
+	public void setNaissance(LocalDate naissance) {
+		this.naissance = naissance;
 	}
 
 	@Override

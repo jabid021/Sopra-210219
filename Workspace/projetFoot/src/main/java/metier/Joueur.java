@@ -114,8 +114,8 @@ public class Joueur {
 	}
 
 
-	public void setNaissance(LocalDate naissance) {
-		this.naissance = naissance;
+	public void setNaissance(String naissance) {
+		this.naissance = LocalDate.parse(naissance);
 	}
 
 	
