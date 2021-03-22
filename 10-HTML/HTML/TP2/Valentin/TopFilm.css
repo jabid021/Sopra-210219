@@ -1,0 +1,10 @@
+li {
+	 list-style-type: square;
+}
+
+body {
+  font-size:20px;
+}
+.main_actor{
+  color: red;
+}
