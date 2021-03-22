@@ -10,21 +10,22 @@ bouton radio (choix unique)
 button -->
 
 
-
-<form>
+<form action="pageCible" method="post" >
 <fieldset>
   <legend>Informations prio</legend>
 
-<label id="labLog">Login</label> <input id="login" placeholder="Login" type="text"><br><br>
-Password <input  placeholder="****" type="password"><br><br>
-Mail <input type="mail"> <br><br>
-Naissance <input type="date"><br><br>
-Heure reveil ? : <input type="time"><br><br>
-Semaine ? : <input type="week"><br><br>
+ID : <input readonly type="text" value="12"><br><br>
+
+<label id="labLog">Login *</label> <input name="login" autofocus required id="login" placeholder="Login" type="text"><br><br>
+Password * <input name="password" maxlength="10" minlength="5" required placeholder="****" type="password"><br><br>
+Mail * <input  name="email" size="40" required type="email"> <br><br>
+Naissance <input  name="naissance" value="2021-03-22" type="date"><br><br>
+<!-- Heure reveil ? : <input type="time"><br><br>
+Semaine ? : <input type="week"><br><br>-->
 Civ :
-<select>
+<select name="civ">
   <option>NC</option>
-  <option>Homme</option>
+  <option selected>Homme</option>
   <option>Femme</option>
 </select><br><br>
 
@@ -37,30 +38,30 @@ Civ :
 <legend>Perso</legend>
 Loisir(s) :
 
-<input id="cinema" type="checkbox"> <label for="cinema">Cinema</label>
-<input id="sport" type="checkbox"> <label for="sport">Sport</label>
-<input id="lecture" type="checkbox"> <label for="lecture">Lecture</label>
-<input id="magie" type="checkbox"> <label for="magie"> Magie</label>
+<input id="cinema" name="cinema" type="checkbox"> <label for="cinema">Cinema</label>
+<input checked id="sport" name="sport" type="checkbox"> <label for="sport">Sport</label>
+<input id="lecture" name="lecture" type="checkbox"> <label for="lecture">Lecture</label>
+<input id="magie" name="magie" type="checkbox"> <label for="magie"> Magie</label>
 <br><br>
 
 
 Plutot :
-<input type="radio" name="saison">Printemps
-<input type="radio" name="saison">Ete
-<input type="radio" name="saison">Automne
-<input type="radio" name="saison">Hiver
+<input checked type="radio" value="printemps" name="saison">Printemps
+<input type="radio" value="ete" name="saison">Ete
+<input type="radio" value="automne" name="saison">Automne
+<input type="radio" value="hiver" name="saison">Hiver
 
 
 
 <br><br>
 Saisir votre message : <br>
-<textarea rows="8" ></textarea><br>
+<textarea rows="8" placeholder="Saisir votre message" ></textarea><br>
 
-
+<input type="file">
 </fieldset>
 
 <!--
-<input type="file">
+
 Fond : <input type="color"><br><br>
 <input type="range" min="1" max="10">
 
