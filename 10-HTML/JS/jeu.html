@@ -1,0 +1,33 @@
+<script>
+/*if(confirm("Changer le mot de passe"))
+{
+  var password=prompt("Saisir le nouveau password");
+  alert("Mot de passe updated ("+password+")");
+}*/
+
+
+var p1={pays:"France",ville:"Paris"};
+var p2={pays:"Suisse",ville:"Berne"};
+var p3={pays:"Allemagne",ville:"Berlin"};
+var p4={pays:"Pologne",ville:"Varsovie"};
+var p5={pays:"Mongolie",ville:"Oulan-Bator"};
+
+var tab = [p1,p2,p3,p4,p5];
+var rep;
+var score=0;
+
+for(var i =0;i<tab.length;i++)
+{
+  rep= prompt("Capitale du pays : "+tab[i].pays);
+  if(rep==tab[i].ville)
+  {
+    alert("Bonne réponse");score++;
+  }
+  else{alert("Ouch, coup dur...");}
+}
+console.log("Votre score est de "+score+" sur "+tab.length);
+
+
+
+
+  </script>

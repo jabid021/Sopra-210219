@@ -1,12 +1,25 @@
 
 
-<h1>Ma page HTML avec du JS</h1>
-
+<h1 id="titre">Ma page HTML avec du JS</h1>
+<input id="champ" type="text" value="test">
 
 
 
 <script>
 
+
+var titreJs = document.getElementById("titre");
+
+
+titreJs.style.color="red";
+titreJs.style.backgroundColor="blue";
+alert(titreJs.innerHTML);
+titreJs.innerHTML="<p>nouveau parag</p>";
+
+alert(champ.value);
+champ.value="Jordan";
+
+/*
 var prenom;
 var age="20";
 
@@ -19,7 +32,7 @@ alert(tab.sort(tri));
 function tri(a,b)
 {
   return a-b;
-}
+}*/
 /*
 var pers =new Object();
 pers.age=27;
