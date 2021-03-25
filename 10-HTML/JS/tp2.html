@@ -1,0 +1,96 @@
+
+<body style="background-color: lightyellow;">
+
+<p id="paragPrinci" class="secondaire">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+<p class="secondaire">Parag secondaire</p>
+
+<p>Parag milieu</p>
+
+<h3 class="secondaire">Titre secondaire</h3>
+
+<p class="secondaire">Parag secondaire</p>
+<p>Parag fin</p>
+
+
+
+
+<script>
+
+var color="red";
+
+setTimeout(stopInterval,8000);
+var chronoSwitch = setInterval(changeColor,1000);
+
+
+function stopInterval()
+{
+  clearInterval(chronoSwitch);
+}
+
+
+function changeColor()
+{
+  if(color=="red")
+  {
+    paragPrinci.style.color="green";
+    color="green";
+  }
+  else
+  {
+    paragPrinci.style.color="red";
+    color="red";
+  }
+}
+/*
+
+var choixElement = prompt("Choisir un type d'element à modifier (id,class,tag)");
+var choixModif = prompt("Choisir une propriete (color,font-size....)");
+var choixValeur = prompt("Choisir la valeur de "+choixModif+" sur ("+choixElement+")");
+
+switch(choixElement)
+{
+  case "id" : modifById();break;
+  case "class" : modifByClass();break;
+  case "tag" : modifByTag();break;
+  default : alert("Error, element introuvable");
+}
+
+
+
+
+function modifById()
+{
+  paragPrinci.style.setProperty(choixModif, choixValeur);
+}
+
+
+function modifByClass()
+{
+  tab = document.getElementsByClassName("secondaire");
+  for(i=0;i<tab.length;i++)
+  {
+    tab[i].style.setProperty(choixModif, choixValeur);
+  }
+}
+
+
+
+function modifByTag()
+{
+  tag=prompt("Choix du tag à modifier");
+  tab = document.getElementsByTagName(tag);
+  for(i=0;i<tab.length;i++)
+  {
+    tab[i].style.setProperty(choixModif, choixValeur);
+  }
+}
+
+*/
+
+
+
+
+
+
+</script>
