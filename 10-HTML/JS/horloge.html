@@ -1,0 +1,61 @@
+
+<input id="playBtn" type="button" value="PLAY">
+
+<input id="stopBtn" type="button" value="STOP" disabled>
+
+
+<span id="minute">00</span>
+<span>:</span>
+<span id="seconde">58</span>
+
+<br><br>
+
+<span id="chrono">00:58</span>
+
+
+
+<script>
+
+var sec=seconde.innerHTML;
+var min=minute.innerHTML;
+var inter;
+playBtn.onclick=lancerChrono;
+stopBtn.onclick=stopChrono;
+
+function stopChrono()
+{
+  playBtn.disabled=false;
+  stopBtn.disabled=true;
+}
+
+
+function lancerChrono()
+{
+  clearInterval(inter);
+  playBtn.disabled=true;
+  stopBtn.disabled=false;
+  inter=setInterval(calculTimer,1000);
+}
+
+
+function calculTimer()
+{
+    sec++;
+    if(sec==60)
+    {
+      sec=0;
+      min++;
+    }
+    minute.innerHTML=min.toLocaleString('en-US', {minimumIntegerDigits: 2});
+    seconde.innerHTML=sec.toLocaleString('en-US', {minimumIntegerDigits: 2});
+
+
+    chrono.innerHTML=minute.innerHTML+":"+seconde.innerHTML;
+}
+
+
+
+
+
+
+</script>

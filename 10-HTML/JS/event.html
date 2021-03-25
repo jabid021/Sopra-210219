@@ -1,0 +1,68 @@
+
+<input onMouseout="alert('out')" onClick="testParam('toto')" type="button" value="OK">
+
+<input id="btnOk2" type="button" value="OK2">
+
+
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+<p tabindex="0" id="parag">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
+
+
+
+<input id="login">
+
+
+
+<script>
+
+parag.onclick=unDesEvents;
+parag.ondblclick=unDesEvents;
+parag.onmousedown=unDesEvents;
+parag.onmouseover=unDesEvents;
+parag.onmousemove=unDesEvents;
+parag.onmouseup=unDesEvents;
+parag.onmouseout=unDesEvents;
+
+
+parag.onkeypress=unDesEvents;
+
+
+
+function unDesEvents(e)
+{
+switch(e.type){
+  case "click":console.log("click sur p "+e.clientX+"-"+e.screenY);break;
+  case "dblclick":console.log("dblclick sur p");break;
+  case "mousedown":console.log("mousedown sur p");break;
+  case "mouseup": console.log("mouse up sur p");break;
+  case "mouseover":console.log("over sur p");break;
+  case "mouseout":console.log("out sur p");break;
+  case "mousemove":console.log("moove sur p");break;
+  case "keypress":alert(e.ctrlKey);
+
+
+  if(e.keyCode==13){alert("Enter");}
+  else if(e.keyCode==65){alert("A");}
+
+  ;break;
+  }
+}
+
+
+
+/*btnOk2.onclick=function(){alert("ok2");}
+parag.onclick=test;
+
+
+function test()
+{
+  alert("ok2");
+}
+
+
+function testParam(lib)
+{
+  alert(lib);
+}*/
+</script>
