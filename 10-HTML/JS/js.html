@@ -1,23 +1,58 @@
 
 
-<h1 id="titre">Ma page HTML avec du JS</h1>
+<h1 class="txtImportant" id="titre">Ma page HTML avec du JS</h1>
+<h1 class="txtImportant"> Titre 2</h1>
+<p class="txtImportant">Lorem</p>
 <input id="champ" type="text" value="test">
+
 
 
 
 <script>
 
+console.log("domaine : "+document.domain);
+console.log("url : "+document.URL);
+document.title="SOPRAJC";
+modifByTag();
 
-var titreJs = document.getElementById("titre");
+
+function modifByClass()
+{
+  var txtImportantTab = document.getElementsByClassName("txtImportant");
+  console.log(txtImportantTab);
+  for(var i=0; i< txtImportantTab.length; i++)
+  {
+    txtImportantTab[i].style.color="blue";
+    alert(txtImportantTab[i].innerHTML);
+  }
+}
+
+function modifByTag()
+{
+  var tabH1 = document.getElementsByTagName("h1");
+  for(var i=0; i< tabH1.length; i++)
+  {
+    tabH1[i].style.fontSize="80px";
+  }
+}
+
+function modifsById()
+{
+  var titreJs = document.getElementById("titre");
 
 
-titreJs.style.color="red";
-titreJs.style.backgroundColor="blue";
-alert(titreJs.innerHTML);
-titreJs.innerHTML="<p>nouveau parag</p>";
+  console.log(titre.style.color);
 
-alert(champ.value);
-champ.value="Jordan";
+  titreJs.style.color="red";
+  /*titreJs.style.backgroundColor="blue";
+
+
+  alert(titreJs.innerHTML);
+  titreJs.innerHTML="<p>nouveau parag</p>";
+
+  alert(champ.value);
+  champ.value="Jordan";*/
+}
 
 /*
 var prenom;
