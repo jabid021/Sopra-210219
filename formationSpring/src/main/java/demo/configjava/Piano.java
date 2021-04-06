@@ -1,4 +1,7 @@
-package demo;
+package demo.configjava;
+
+import demo.xml.Instrument;
+
 
 public class Piano implements Instrument {
 	@Override
