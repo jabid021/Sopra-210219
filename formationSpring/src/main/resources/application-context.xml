@@ -7,5 +7,22 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
+	<!-- fichier configuration de spring version xml -->
+
+	<!-- <bean id="guitare" class="demo.Guitare"></bean> -->
+	<!-- <bean id="piano" class="demo.Piano"></bean> -->
+
+	<!-- <bean id="guitariste" class="demo.Guitariste"> -->
+	<!-- <property name="instrument"> -->
+	<!-- <bean class="demo.Guitare"></bean> -->
+	<!-- </property> -->
+	<!-- </bean> -->
+
+	<!-- <bean id="pianiste" class="demo.Pianiste"> -->
+	<!-- <property name="instrument" ref="piano"></property> -->
+	<!-- </bean> -->
+
+	<context:annotation-config></context:annotation-config>
+	<context:component-scan base-package="demo.annotation"></context:component-scan>
 
 </beans>
