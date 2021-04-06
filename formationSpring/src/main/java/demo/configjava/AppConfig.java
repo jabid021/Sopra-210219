@@ -9,7 +9,7 @@ import demo.xml.Instrument;
 
 @Configuration
 @ComponentScan({ "demo.configjava" })
-@ImportResource("classpath:application-context.xml")
+//@ImportResource("classpath:application-context.xml")
 public class AppConfig {
 
 	@Bean("piano")
