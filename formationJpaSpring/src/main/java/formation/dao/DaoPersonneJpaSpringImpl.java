@@ -23,6 +23,7 @@ public class DaoPersonneJpaSpringImpl implements DaoPersonne {
 	@Override
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	public void insert(Personne obj) {
+		System.out.println(em);
 		em.persist(obj);
 	}
 
