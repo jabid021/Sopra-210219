@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 
 import exoAspect.annotation.LesSpectateurs;
 
-@Component
+
 public class Trompetiste implements Musicien {
 
 	@Override

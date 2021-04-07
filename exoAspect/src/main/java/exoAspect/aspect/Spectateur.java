@@ -44,6 +44,10 @@ public class Spectateur {
 			} finally {
 				partir();
 			}
+		} else {
+			prendrePlace();
+			pJP.proceed();
+			partir();
 		}
 
 	}
