@@ -1,16 +1,17 @@
 package exoAspect;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
-import exoAspect.dao.DaoGeneric;
+import exoAspect.musique.Musicien;
 
 public class AppSpring {
 
 	@Autowired
-	private DaoGeneric dao;
+	@Qualifier("pianiste")
+	private Musicien musicien;
 
 	public void run(String[] args) {
-		dao.insert(null);
-		dao.findByKey();
+		musicien.jouer();
 	}
 }

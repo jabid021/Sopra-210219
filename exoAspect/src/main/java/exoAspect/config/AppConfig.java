@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 @Configuration
-@ComponentScan({ "exoAspect.dao", "exoAspect.aspect" })
+@ComponentScan({ "exoAspect.dao", "exoAspect.aspect", "exoAspect.musique" })
 @EnableAspectJAutoProxy
 public class AppConfig {
 
