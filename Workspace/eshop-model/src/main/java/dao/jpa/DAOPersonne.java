@@ -30,6 +30,7 @@ public class DAOPersonne implements IDAOPersonne {
 		em.getTransaction().begin();
 		personne=em.merge(personne);
 		
+	
 		em.getTransaction().commit();
 		em.close();
 		return personne;

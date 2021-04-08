@@ -4,39 +4,38 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import org.hibernate.annotations.Type;
+
 @Entity
-@Table(name = "personne")
-@SequenceGenerator(name = "seqPersonne", sequenceName = "seq_personne", initialValue = 100, allocationSize = 1)
-public class Personne {
+@Table(name = "produit")
+@SequenceGenerator(name = "seqProduit", sequenceName = "seq_produit", allocationSize = 1, initialValue = 100)
+public class Produit {
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqPersonne")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqProduit")
 	private Integer id;
-	@Column(name = "prenom", length = 100)
-	private String prenom;
 	@Column(name = "nom", length = 100)
 	private String nom;
-	@OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
-	private Set<Commande> commandes;
+	@Lob
+	@Type(type = "org.hibernate.type.TextType")
+	@Column(name = "description")
+	private String description;
+	@OneToMany(mappedBy = "id.produit")
+	private Set<LigneCommande> lignesCommandes;
 	@Version
 	private int version;
 
-	public Personne() {
+	public Produit() {
 
-	}
-
-	public Personne(String prenom, String nom) {
-		super();
-		this.prenom = prenom;
-		this.nom = nom;
 	}
 
 	public Integer getId() {
@@ -47,14 +46,6 @@ public class Personne {
 		this.id = id;
 	}
 
-	public String getPrenom() {
-		return prenom;
-	}
-
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
-	}
-
 	public String getNom() {
 		return nom;
 	}
@@ -63,12 +54,20 @@ public class Personne {
 		this.nom = nom;
 	}
 
-	public Set<Commande> getCommandes() {
-		return commandes;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setCommandes(Set<Commande> commandes) {
-		this.commandes = commandes;
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Set<LigneCommande> getLignesCommandes() {
+		return lignesCommandes;
+	}
+
+	public void setLignesCommandes(Set<LigneCommande> lignesCommandes) {
+		this.lignesCommandes = lignesCommandes;
 	}
 
 	public int getVersion() {
@@ -95,7 +94,7 @@ public class Personne {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Personne other = (Personne) obj;
+		Produit other = (Produit) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
