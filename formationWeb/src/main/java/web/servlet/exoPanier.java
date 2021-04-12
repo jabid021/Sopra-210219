@@ -60,11 +60,11 @@ public class exoPanier extends HttpServlet {
 		if (query == null || query.isEmpty()) {
 			rd = list(request, response);
 		} else if (query.equals("save")) {
-
+			rd = save(request, response);
 		} else if (query.equals("add")) {
 			rd = add(request, response);
 		} else if (query.equals("remove")) {
-
+			rd = remove(request, response);
 		}
 		rd.forward(request, response);
 
@@ -128,7 +128,9 @@ public class exoPanier extends HttpServlet {
 			lc.setQuantite(panier.get(p));
 			ligneCommandeRepository.save(lc);
 		}
-		return request.getRequestDispatcher("/WEB-INF/commande/list.jsp");
+		request.setAttribute("commande", commande);
+		session.removeAttribute("panier");
+		return request.getRequestDispatcher("/WEB-INF/exo/commande.jsp");
 
 	}
 }
