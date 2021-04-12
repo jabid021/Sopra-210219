@@ -1,6 +1,8 @@
 package web.servlet;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.servlet.RequestDispatcher;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.context.ApplicationContext;
 
+import formation.entity.Personne;
 import formation.entity.Produit;
 import formation.repositories.ProduitRepository;
 
@@ -114,4 +117,20 @@ public class ProduitController extends HttpServlet {
 		return list(request, response);
 	}
 
+	private void demoMap() {
+		Map<String, Personne> panier = new HashMap<String, Personne>();
+		panier.put("olivier", new Personne("olivier", "gozlan"));
+		panier.put("jordan", new Personne("jordan", "abid"));
+
+		System.out.println(panier.get("jordan").getInfos());
+
+		// panier.remove("olivier");
+
+		panier.values();
+		if (panier.containsKey("jordan")) {
+			System.out.println("on a deja jordan en cle");
+		} else {
+			System.out.println("on a pas jordan en cle");
+		}
+	}
 }
