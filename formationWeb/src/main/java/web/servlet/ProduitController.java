@@ -101,7 +101,7 @@ public class ProduitController extends HttpServlet {
 
 	private RequestDispatcher save(HttpServletRequest request, HttpServletResponse response) {
 		Integer id = null;
-		if (request.getParameter("id") != null) {
+		if (!request.getParameter("id").isEmpty()) {
 			id = Integer.parseInt(request.getParameter("id"));
 		}
 		String nom = request.getParameter("nom");
