@@ -14,6 +14,7 @@ import org.omg.CORBA.Request;
 import org.springframework.context.ApplicationContext;
 
 import formation.entity.Personne;
+import formation.repositories.CommandeRepository;
 import formation.repositories.PersonneRepository;
 
 /**
@@ -31,7 +32,8 @@ public class ClientController extends HttpServlet {
 			throws ServletException, IOException {
 		PersonneRepository personneRepository = null;
 		RequestDispatcher rd = null;
-
+		CommandeRepository commandeRepository = ((ApplicationContext) this.getServletContext().getAttribute("spring"))
+				.getBean(CommandeRepository.class);
 		personneRepository = ((ApplicationContext) this.getServletContext().getAttribute("spring"))
 				.getBean(PersonneRepository.class);
 
@@ -43,6 +45,7 @@ public class ClientController extends HttpServlet {
 		} else if (query.equals("delete")) {
 			// supprimer une personne
 			int id = Integer.parseInt(request.getParameter("id"));
+			commandeRepository.deleteByClientId(id);
 			personneRepository.deleteById(id);
 			rd = goList(request, response, personneRepository);
 		} else if (query.equals("edit")) {
