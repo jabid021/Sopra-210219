@@ -31,7 +31,7 @@ public class BonjourController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// controle
-		// verification qu'il y a un prenom
+		// verification qu'il y a un prenom 
 		RequestDispatcher rd = null;
 		String prenom = null;
 		if (request.getParameter("prenom") != null && !request.getParameter("prenom").equals("")) {
