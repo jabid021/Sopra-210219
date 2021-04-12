@@ -39,6 +39,10 @@ public class Personne {
 		this.nom = nom;
 	}
 
+	public String getInfos() {
+		return id + " " + prenom + " " + nom;
+	}
+
 	public Integer getId() {
 		return id;
 	}
