@@ -14,7 +14,7 @@
 	<table>
 		<c:forEach items="${clients}" var="c" varStatus="status">
 			<tr>
-				<td>${c.id}</td>
+				<td>${c.id} {$status.index}</td>
 				<td>${c.prenom}</td>
 				<td>${c.nom}</td>
 				<td><a href="?query=edit&id=${c.id}">editer</a></td>
