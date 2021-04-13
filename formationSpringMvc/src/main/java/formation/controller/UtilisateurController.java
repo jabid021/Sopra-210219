@@ -62,7 +62,7 @@ public class UtilisateurController {
 	private String goEdit(Utilisateur utilisateur, Integer index, Model model) {
 		model.addAttribute("utilisateur", utilisateur);
 		model.addAttribute("index", index);
-		return "utilisateur/edit";
+		return "utilisateur/editSpring";
 	}
 
 	@PostMapping("/save")
