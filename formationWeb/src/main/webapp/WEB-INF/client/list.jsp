@@ -12,7 +12,7 @@
 		el=>parametre requete=>requete=>session=>servletContext
 	 -->
 	<table>
-		<c:forEach items="${clients}" var="c">
+		<c:forEach items="${clients}" var="c" varStatus="status">
 			<tr>
 				<td>${c.id}</td>
 				<td>${c.prenom}</td>
