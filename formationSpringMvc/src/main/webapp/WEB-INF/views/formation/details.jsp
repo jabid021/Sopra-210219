@@ -51,11 +51,16 @@
 						<c:forEach items="${formation.modules}" var="module">
 							<tr>
 								<td>${module.id.module.nom}</td>
-								<td>${module.intervenant.prenom}&nbsp;${module.intervenant.nom}</td>
+								<td>${empty module.intervenant ? 'pas de formateur affecté' : module.intervenant.prenom.concat(' ').concat(module.intervenant.nom)}
+								</td>
 								<td>${module.dateModule}</td>
 								<td>${module.id.module.duree}</td>
-								<td>modifier</td>
-								<td>supprimer</td>
+								<td><a
+									href="${ctx}/formation/details/editModule?idModule=${module.id.module.code}&idFormation=${formation.id}"
+									class="btn btn-outline-primary">modifier</a></td>
+								<td><a
+									href="${ctx}/formation/details/deleteModule?idModule=${module.id.module.code}&idFormation=${formation.id}"
+									class="btn btn-outline-danger">supprimer</a></td>
 							</tr>
 						</c:forEach>
 					</table>
@@ -64,9 +69,10 @@
 		</div>
 		<div>
 			<h2>ajouter un module</h2>
-			<form:form action="saveModule" method="post"
+			<form:form action="${ctx}/formation/details/saveModule" method="post"
 				modelAttribute="moduleFormation">
 				<form:hidden path="id.formation.id" />
+				<form:hidden path="version" />
 				<div class="form-group">
 					<form:label path="id.module">module:</form:label>
 					<form:select path="id.module.code" cssClass="form-control"
@@ -75,6 +81,7 @@
 				<div class="form-group">
 					<form:label path="">internenant:</form:label>
 					<form:select path="intervenant.id" cssClass="form-control">
+						<form:option value="">pas de formateur affecté</form:option>
 						<form:options items="${formateurs}" itemValue="id"
 							itemLabel="infos" />
 					</form:select>
@@ -85,7 +92,8 @@
 				</div>
 				<div class="form-group">
 					<button type="submit" class="btn btn-outline-success">enregistrer</button>
-					<button type="reset" class="btn btn-outline-warning">annuler</button>
+					<a href="${ctx}/formation/details?id=${formation.id}"
+						class="btn btn-outline-warning">annuler</a>
 				</div>
 			</form:form>
 		</div>

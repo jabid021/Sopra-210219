@@ -1,6 +1,9 @@
 package formation.controller;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -70,20 +73,51 @@ public class FormationController {
 
 	@GetMapping("/details")
 	public ModelAndView details(@RequestParam Integer id) {
-		ModelAndView modelAndView = new ModelAndView("formation/details");
 		Formation formation = formationRepository.findByIdWithModules(id).get();
-		modelAndView.addObject("formation", formation);
-		modelAndView.addObject("formateurs", formateurRepository.findAll());
-		modelAndView.addObject("modules", moduleRepository.findAll());
 		ModuleFormation moduleFormation = new ModuleFormation();
 		moduleFormation.setId(new ModuleFormationPK(formation, new Module()));
-		modelAndView.addObject("moduleFormation", moduleFormation);
-		return modelAndView;
+		return goDetails(formation, moduleFormation, moduleRepository.findAll());
 	}
 
-	@PostMapping("/saveModule")
+	@PostMapping("/details/saveModule")
 	public ModelAndView saveModule(ModuleFormation moduleFormation) {
+		if (moduleFormation.getIntervenant().getId() == null) {
+			moduleFormation.setIntervenant(null);
+		}
 		moduleFormationRepository.save(moduleFormation);
 		return new ModelAndView("redirect:/formation/details?id=" + moduleFormation.getId().getFormation().getId());
+	}
+
+	@GetMapping("/details/deleteModule")
+	public ModelAndView deleteModule(@RequestParam(name = "idModule") Integer idModule,
+			@RequestParam(name = "idFormation") Integer idFormation) {
+		Formation formation = new Formation();
+		formation.setId(idFormation);
+		Module module = new Module();
+		module.setCode(idModule);
+		moduleFormationRepository.deleteById(new ModuleFormationPK(formation, module));
+		return new ModelAndView("redirect:/formation/details?id=" + idFormation);
+	}
+
+	@GetMapping("/details/editModule")
+	public ModelAndView editModule(@RequestParam(name = "idModule") Integer idModule,
+			@RequestParam(name = "idFormation") Integer idFormation) {
+		Formation formation = formationRepository.findByIdWithModules(idFormation).get();
+		Module module = moduleRepository.findById(idModule).get();
+		ModuleFormation moduleFormation = moduleFormationRepository.findById(new ModuleFormationPK(formation, module))
+				.get();
+		System.out.println(moduleFormation.getId().getModule().getNom());
+		return goDetails(formation, moduleFormation, Arrays.asList(moduleFormation.getId().getModule()));
+
+	}
+
+	private ModelAndView goDetails(Formation formation, ModuleFormation moduleFormation, List<Module> modules) {
+		ModelAndView modelAndView = new ModelAndView("formation/details");
+		modelAndView.addObject("formation", formation);
+		modelAndView.addObject("formateurs", formateurRepository.findAll());
+		System.out.println(modules);
+		modelAndView.addObject("modules", modules);
+		modelAndView.addObject("moduleFormation", moduleFormation);
+		return modelAndView;
 	}
 }

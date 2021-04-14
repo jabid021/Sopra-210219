@@ -66,4 +66,6 @@ public class FormateurController {
 		ModelAndView modelAndView = new ModelAndView("formateur/edit", "formateur", formateur);
 		return modelAndView;
 	}
+
+	
 }
