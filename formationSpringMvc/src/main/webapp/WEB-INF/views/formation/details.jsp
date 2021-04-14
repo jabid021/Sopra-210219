@@ -28,25 +28,37 @@
 </head>
 <body>
 	<div class="container">
-		<h1>liste des formations</h1>
-		<table class="table">
-			<c:forEach items="${formations}" var="f">
-				<tr>
-					<td>${f.id}</td>
-					<td><fmt:parseDate value="${f.dateFormation}"
-							pattern="yyyy-MM-dd" var="dateFormationAvecFormatage"></fmt:parseDate>
-						<fmt:formatDate value="${dateFormationAvecFormatage}"
-							pattern="dd/MM/yyyy" /></td>
-					<td>${f.referent.prenom}&nbsp;${f.referent.nom}</td>
-					<td><a href="${ctx}/formation/details?id=${f.id}"
-						class="btn btn-link">details</a></td>
-					<td><a href="${ctx}/formation/delete?id=${f.id}"
-						class="btn btn-outline-danger">supprimer</a>
-				</tr>
-			</c:forEach>
-		</table>
-		<a href="${ctx}/formation/add" class="btn btn-link">ajouter
-			formation</a>
+		<h1>details de la formation ${formation.id}</h1>
+		<h2>informations</h2>
+		<div>
+			<ul>
+				<li>formateur
+					referent:${formation.referent.prenom}&nbsp;${formation.referent.nom}
+				</li>
+				<li>date de la formation:<fmt:parseDate
+						value="${formation.dateFormation}" pattern="yyyy-MM-dd"
+						var="dateFormationAvecFormatage"></fmt:parseDate> <fmt:formatDate
+						value="${dateFormationAvecFormatage}" pattern="dd/MM/yyyy" /></li>
+				<li>liste des modules
+					<table class="table">
+						<tr>
+							<th>nom du module</th>
+							<th>formateur</th>
+							<th>date du module</th>
+							<th>duree</th>
+						</tr>
+						<c:forEach items="${formation.modules}" var="module">
+							<tr>
+								<td>${module.id.module.nom}</td>
+								<td>${module.intervenant.prenom}&nbsp;${module.intervenant.nom}</td>
+								<td>${module.dateModule}</td>
+								<td>${module.id.module.duree}</td>
+							</tr>
+						</c:forEach>
+					</table>
+				</li>
+			</ul>
+		</div>
 	</div>
 </body>
 </html>

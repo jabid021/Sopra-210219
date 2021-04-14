@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import formation.entity.Formation;
 import formation.repositories.FormateurRepository;
 import formation.repositories.FormationRepository;
+import formation.repositories.ModuleRepository;
 
 @Controller
 @RequestMapping("/formation")
@@ -25,6 +26,8 @@ public class FormationController {
 	private FormationRepository formationRepository;
 	@Autowired
 	private FormateurRepository formateurRepository;
+	@Autowired
+	private ModuleRepository moduleRepository;
 
 	@GetMapping({ "", "/" })
 	public ModelAndView list() {
@@ -57,5 +60,16 @@ public class FormationController {
 		System.out.println(formation.getDateFormation());
 		formationRepository.save(formation);
 		return new ModelAndView("redirect:/formation");
+	}
+
+	@GetMapping("/details")
+	public ModelAndView details(@RequestParam Integer id) {
+		ModelAndView modelAndView = new ModelAndView("formation/details");
+		// probleme
+		modelAndView.addObject("formation", formationRepository.findByIdWithModules(id).get());
+		modelAndView.addObject("formateurs", formateurRepository.findAll());
+		modelAndView.addObject("modules", moduleRepository.findAll());
+		return modelAndView;
+
 	}
 }

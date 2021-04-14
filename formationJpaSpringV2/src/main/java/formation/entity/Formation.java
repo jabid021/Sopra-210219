@@ -37,6 +37,8 @@ public class Formation {
 	@ManyToOne
 	@JoinColumn(name = "id_formateur", foreignKey = @ForeignKey(name = "formation_id_formateur_fk"))
 	private Formateur referent;
+	@OneToMany(mappedBy = "id.formation")
+	private Set<ModuleFormation> modules;
 	@Version
 	private int version;
 
@@ -66,6 +68,14 @@ public class Formation {
 
 	public void setReferent(Formateur referent) {
 		this.referent = referent;
+	}
+
+	public Set<ModuleFormation> getModules() {
+		return modules;
+	}
+
+	public void setModules(Set<ModuleFormation> modules) {
+		this.modules = modules;
 	}
 
 	public int getVersion() {
