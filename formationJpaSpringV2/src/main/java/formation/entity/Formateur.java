@@ -12,6 +12,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Version;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "formateur")
@@ -20,9 +23,11 @@ public class Formateur {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqFormateur")
 	private Integer id;
-	@Column(name = "prenom", length = 150)
+	@NotEmpty
+	@Column(name = "prenom", length = 150, nullable = false)
 	private String prenom;
 	@Column(name = "nom", length = 150)
+	@NotEmpty
 	private String nom;
 	@OneToMany(mappedBy = "referent")
 	private Set<Formation> formations;
@@ -33,6 +38,10 @@ public class Formateur {
 
 	public Formateur() {
 
+	}
+
+	public String getInfos() {
+		return id + " " + prenom + " " + nom;
 	}
 
 	public Integer getId() {

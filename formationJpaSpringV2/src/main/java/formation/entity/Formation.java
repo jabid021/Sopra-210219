@@ -15,6 +15,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Version;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import formation.validator.FormationDansLeFutur;
 
 @Entity
 @SequenceGenerator(name = "seqFormation", sequenceName = "seq_formation", initialValue = 100, allocationSize = 1)
@@ -24,6 +31,8 @@ public class Formation {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqFormation")
 	private Integer id;
 	@Column(name = "date_formation")
+	@FormationDansLeFutur
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dateFormation;
 	@ManyToOne
 	@JoinColumn(name = "id_formateur", foreignKey = @ForeignKey(name = "formation_id_formateur_fk"))
@@ -91,6 +100,5 @@ public class Formation {
 			return false;
 		return true;
 	}
-	
 
 }
