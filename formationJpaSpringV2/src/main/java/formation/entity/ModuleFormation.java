@@ -11,12 +11,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name = "module_formation")
 public class ModuleFormation {
 	@EmbeddedId
 	private ModuleFormationPK id;
 	@Column(name = "date_module")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dateModule;
 	@ManyToOne
 	@JoinColumn(name = "id_intervenant", foreignKey = @ForeignKey(name = "module_formation_id_intervenant_fk"))
@@ -35,7 +38,6 @@ public class ModuleFormation {
 	public void setId(ModuleFormationPK id) {
 		this.id = id;
 	}
-
 
 	public LocalDate getDateModule() {
 		return dateModule;

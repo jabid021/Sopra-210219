@@ -20,6 +20,12 @@ public class ModuleFormationPK implements Serializable {
 
 	}
 
+	public ModuleFormationPK(Formation formation, Module module) {
+		super();
+		this.formation = formation;
+		this.module = module;
+	}
+
 	public Formation getFormation() {
 		return formation;
 	}

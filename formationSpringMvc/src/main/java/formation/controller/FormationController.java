@@ -15,8 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import formation.entity.Formation;
+import formation.entity.Module;
+import formation.entity.ModuleFormation;
+import formation.entity.ModuleFormationPK;
 import formation.repositories.FormateurRepository;
 import formation.repositories.FormationRepository;
+import formation.repositories.ModuleFormationRepository;
 import formation.repositories.ModuleRepository;
 
 @Controller
@@ -28,6 +32,8 @@ public class FormationController {
 	private FormateurRepository formateurRepository;
 	@Autowired
 	private ModuleRepository moduleRepository;
+	@Autowired
+	private ModuleFormationRepository moduleFormationRepository;
 
 	@GetMapping({ "", "/" })
 	public ModelAndView list() {
@@ -65,11 +71,19 @@ public class FormationController {
 	@GetMapping("/details")
 	public ModelAndView details(@RequestParam Integer id) {
 		ModelAndView modelAndView = new ModelAndView("formation/details");
-		// probleme
-		modelAndView.addObject("formation", formationRepository.findByIdWithModules(id).get());
+		Formation formation = formationRepository.findByIdWithModules(id).get();
+		modelAndView.addObject("formation", formation);
 		modelAndView.addObject("formateurs", formateurRepository.findAll());
 		modelAndView.addObject("modules", moduleRepository.findAll());
+		ModuleFormation moduleFormation = new ModuleFormation();
+		moduleFormation.setId(new ModuleFormationPK(formation, new Module()));
+		modelAndView.addObject("moduleFormation", moduleFormation);
 		return modelAndView;
+	}
 
+	@PostMapping("/saveModule")
+	public ModelAndView saveModule(ModuleFormation moduleFormation) {
+		moduleFormationRepository.save(moduleFormation);
+		return new ModelAndView("redirect:/formation/details?id=" + moduleFormation.getId().getFormation().getId());
 	}
 }

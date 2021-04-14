@@ -9,6 +9,8 @@ import javax.persistence.Lob;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Version;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.annotations.Type;
 
@@ -21,12 +23,14 @@ public class Module {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqModule")
 	private Integer code;
 	@Column(name = "nom", length = 100)
+	@NotEmpty
 	private String nom;
 	@Lob
 	@Type(type = "org.hibernate.type.TextType")
+	@NotEmpty
 	@Column(name = "details")
 	private String details;
-
+	@Min(value = 1)
 	@Column(name = "duree")
 	private Integer duree;
 	@Version

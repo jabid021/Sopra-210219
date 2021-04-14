@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <c:set var="ctx" value="${pageContext.servletContext.contextPath }" />
@@ -53,12 +54,43 @@
 								<td>${module.intervenant.prenom}&nbsp;${module.intervenant.nom}</td>
 								<td>${module.dateModule}</td>
 								<td>${module.id.module.duree}</td>
+								<td>modifier</td>
+								<td>supprimer</td>
 							</tr>
 						</c:forEach>
 					</table>
 				</li>
 			</ul>
 		</div>
+		<div>
+			<h2>ajouter un module</h2>
+			<form:form action="saveModule" method="post"
+				modelAttribute="moduleFormation">
+				<form:hidden path="id.formation.id" />
+				<div class="form-group">
+					<form:label path="id.module">module:</form:label>
+					<form:select path="id.module.code" cssClass="form-control"
+						items="${modules}" itemValue="code" itemLabel="nom"></form:select>
+				</div>
+				<div class="form-group">
+					<form:label path="">internenant:</form:label>
+					<form:select path="intervenant.id" cssClass="form-control">
+						<form:options items="${formateurs}" itemValue="id"
+							itemLabel="infos" />
+					</form:select>
+				</div>
+				<div class="form-group">
+					<form:label path="">date de debut:</form:label>
+					<form:input type="date" path="dateModule" cssClass="form-control" />
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-outline-success">enregistrer</button>
+					<button type="reset" class="btn btn-outline-warning">annuler</button>
+				</div>
+			</form:form>
+		</div>
+		<a href="${ctx}/formation" class="btn btn-link">retour liste des
+			formations</a>
 	</div>
 </body>
 </html>
