@@ -36,6 +36,7 @@ public class ModuleFormation {
 		this.id = id;
 	}
 
+
 	public LocalDate getDateModule() {
 		return dateModule;
 	}
