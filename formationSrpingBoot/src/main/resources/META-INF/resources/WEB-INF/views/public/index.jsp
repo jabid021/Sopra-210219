@@ -28,6 +28,7 @@
 <body>
 	<div class="container">
 		<h1>bienvenu sur mon site</h1>
+		<jsp:include page="../auth/logout.jsp"></jsp:include>
 		<a href="${ctx}/public/page1" class="btn btn-link">page1</a>
 	</div>
 </body>

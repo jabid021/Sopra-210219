@@ -27,9 +27,28 @@
 </head>
 <body>
 	<div class="container">
-		<jsp:include page="../auth/logout.jsp"></jsp:include>
-		<h1>page des admins</h1>
-		<a href="${ctx}/public" class="btn btn-link">retour index</a>
+		<h1>authentification</h1>
+		<c:if test="${param.error !=null }">
+			<div class="alert alert-danger">erreur d'authentification</div>
+		</c:if>
+		<form action="" method="post">
+			<input type="hidden" name="${_csrf.parameterName}"
+				value="${_csrf.token}">
+			<div class="form-group">
+				<label for="username">login:</label> <input name="username"
+					required="required" placeholder="saisir votre login"
+					class="form-control">
+			</div>
+			<div class="form-group">
+				<label for="password">mot de passe:</label> <input type="password"
+					name="password" required="required"
+					placeholder="saisir votre mot de passe" class="form-control">
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-outline-info">envoyer</button>
+				<a href="${ctx}/public" class="btn btn-link">annuler</a>
+			</div>
+		</form>
 	</div>
 </body>
 </html>
