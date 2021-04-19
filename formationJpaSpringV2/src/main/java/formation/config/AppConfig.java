@@ -6,6 +6,7 @@ import javax.persistence.EntityManagerFactory;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -55,6 +56,10 @@ public class AppConfig {
 		properties.setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
 		properties.setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
 		properties.setProperty("hibernate.format_sql", "true");
+		properties.setProperty("hibernate.cache.use_second_level_cache", "true");
+		properties.setProperty("hibernate.cache.region.factory_class",
+				"org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory");
+		properties.setProperty("hibernate.cache.use_query_cache", "true");
 		return properties;
 	}
 

@@ -3,6 +3,7 @@ package formation.entity;
 import java.time.LocalDate;
 import java.util.Set;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -16,6 +17,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import formation.validator.FormationDansLeFutur;
@@ -23,6 +26,8 @@ import formation.validator.FormationDansLeFutur;
 @Entity
 @SequenceGenerator(name = "seqFormation", sequenceName = "seq_formation", initialValue = 100, allocationSize = 1)
 @Table(name = "formation")
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Formation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqFormation")

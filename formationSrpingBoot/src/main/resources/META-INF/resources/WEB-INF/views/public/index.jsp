@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 <c:set var="ctx" value="${pageContext.servletContext.contextPath }" />
@@ -30,6 +32,16 @@
 		<h1>bienvenu sur mon site</h1>
 		<jsp:include page="../auth/logout.jsp"></jsp:include>
 		<a href="${ctx}/public/page1" class="btn btn-link">page1</a>
+		<sec:authorize access="isAuthenticated()">
+			<a href="${ctx}/module" class="btn btn-link">module</a>
+			<a href="${ctx}/authenticated" class="btn btn-link">authenticated</a>
+		</sec:authorize>
+		<sec:authorize access="hasRole('ROLE_ADMIN')">
+			<a href="${ctx}/admin" class="btn btn-link">admin</a>
+		</sec:authorize>
+		<sec:authorize access="isAnonymous()">
+			<a href="${ctx}/login" class="btn btn-link">connexion</a>
+		</sec:authorize>
 	</div>
 </body>
 </html>

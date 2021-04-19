@@ -80,7 +80,7 @@ public class FormationController {
 	}
 
 	@PostMapping("/details/saveModule")
-	public ModelAndView saveModule(ModuleFormation moduleFormation) {
+	public ModelAndView saveModule(@ModelAttribute ModuleFormation moduleFormation) {
 		if (moduleFormation.getIntervenant().getId() == null) {
 			moduleFormation.setIntervenant(null);
 		}
@@ -106,7 +106,6 @@ public class FormationController {
 		Module module = moduleRepository.findById(idModule).get();
 		ModuleFormation moduleFormation = moduleFormationRepository.findById(new ModuleFormationPK(formation, module))
 				.get();
-		System.out.println(moduleFormation.getId().getModule().getNom());
 		return goDetails(formation, moduleFormation, Arrays.asList(moduleFormation.getId().getModule()));
 
 	}
@@ -115,7 +114,6 @@ public class FormationController {
 		ModelAndView modelAndView = new ModelAndView("formation/details");
 		modelAndView.addObject("formation", formation);
 		modelAndView.addObject("formateurs", formateurRepository.findAll());
-		System.out.println(modules);
 		modelAndView.addObject("modules", modules);
 		modelAndView.addObject("moduleFormation", moduleFormation);
 		return modelAndView;
