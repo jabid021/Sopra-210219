@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
+<c:set var="ctx" value="${pageContext.servletContext.contextPath }" />
 <head>
 <meta charset="UTF-8">
 <script
@@ -22,31 +23,40 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
 	crossorigin="anonymous"></script>
-<title>Insert title here</title>
+<title>eshop</title>
 </head>
 <body>
 	<div class="container">
-		<h1>edition produit</h1>
-		<form action="${ctx}/admin/produit/save" method="post">
-			
-			<div class="form-group">
-				<label for="id">id:</label> <input id="id" name="id"
-					readonly="readonly" class="form-control" value="${produit.id}">
-			</div>
-			<div class="form-group">
-				<label for="nom">nom:</label> <input name="nom" id="nom"
-					class="form-control" value="${produit.nom}">
-			</div>
-			<div class="form-group">
-				<label for="description">description</label>
-				<textarea rows="10" cols="75" id="description" name="description"
-					class="form-control">${produit.description }</textarea>
-			</div>
-			<div>
-				<button type="submit" class="btn btn-outline-success">enregistrer</button>
-				<a href="produit" class="btn btn-outline-warning">annuler</a>
-			</div>
-		</form>
+		<h1>la liste des utilisateurs inscrit</h1>
+		<div>
+			<a href="${ctx}/public" class="btn btn-link">retour accueil</a>
+		</div>
+		<c:choose>
+			<c:when test="${param.delete != null}">
+				<div class="alert alert-info">utilisateur ${param.delete}
+					supprimé</div>
+			</c:when>
+		</c:choose>
+		<table class="table">
+			<tr>
+				<th>id:</th>
+				<th>prenom:</th>
+				<th>nom:</th>
+				<th>email</th>
+				<th>adresse</th>
+			</tr>
+			<c:forEach items="${personnes}" var="personne">
+				<tr>
+					<td>${personne.id}</td>
+					<td>${personne.prenom}</td>
+					<td>${personne.nom}</td>
+					<td>${personne.email}</td>
+					<td>${personne.adresse}</td>
+					<td><a href="${ctx}/admin/personne/delete?id=${personne.id}"
+						class="btn btn-outline-danger">supprimer</a></td>
+				</tr>
+			</c:forEach>
+		</table>
 	</div>
 </body>
 </html>

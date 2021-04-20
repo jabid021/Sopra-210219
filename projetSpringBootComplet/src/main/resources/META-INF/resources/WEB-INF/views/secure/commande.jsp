@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
+<c:set var="ctx" value="${pageContext.servletContext.contextPath }" />
 <head>
 <meta charset="UTF-8">
 <script
@@ -26,27 +27,29 @@
 </head>
 <body>
 	<div class="container">
-		<h1>edition produit</h1>
-		<form action="${ctx}/admin/produit/save" method="post">
-			
-			<div class="form-group">
-				<label for="id">id:</label> <input id="id" name="id"
-					readonly="readonly" class="form-control" value="${produit.id}">
-			</div>
-			<div class="form-group">
-				<label for="nom">nom:</label> <input name="nom" id="nom"
-					class="form-control" value="${produit.nom}">
-			</div>
-			<div class="form-group">
-				<label for="description">description</label>
-				<textarea rows="10" cols="75" id="description" name="description"
-					class="form-control">${produit.description }</textarea>
-			</div>
-			<div>
-				<button type="submit" class="btn btn-outline-success">enregistrer</button>
-				<a href="produit" class="btn btn-outline-warning">annuler</a>
-			</div>
-		</form>
+		<h1>recapitulatif de votre commande</h1>
+		<div>
+			<h2>identité:</h2>
+			<ul>
+				<li>prenom:${personne.prenom}</li>
+				<li>nom:${personne.nom}</li>
+				<li>email:${personne.email}</li>
+				<li>adresse:${personne.adresse }
+			</ul>
+		</div>
+		<div>
+			<h2>vos articles</h2>
+			<ul>
+				<c:forEach items="${panier.keySet()}" var="produit">
+					<li>produit:${produit.nom} quantité:${panier.get(produit)}</li>
+				</c:forEach>
+			</ul>
+		</div>
+		<div>
+			<a href="${ctx}/secure/commande/save" class="btn btn-outline-info">valider
+				votre commande</a><a href="${ctx}/public/produit" class="btn btn-link">continuer
+				vos achats</a>
+		</div>
 	</div>
 </body>
 </html>
