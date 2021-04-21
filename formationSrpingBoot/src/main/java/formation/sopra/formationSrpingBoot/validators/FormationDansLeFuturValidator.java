@@ -9,7 +9,7 @@ public class FormationDansLeFuturValidator implements ConstraintValidator<Format
 
 	@Override
 	public boolean isValid(LocalDate value, ConstraintValidatorContext context) {
-		return value.isAfter(LocalDate.now());
+		return (value != null) ? value.isAfter(LocalDate.now()) : true;
 	}
 
 }

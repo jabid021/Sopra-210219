@@ -104,14 +104,6 @@ public class PublicController {
 		return modelAndView;
 	}
 
-	@GetMapping("/panier/save")
-	public ModelAndView savePanier(@AuthenticationPrincipal CustomUserDetails cUD) {
-		ModelAndView modelAndView = new ModelAndView();
-		System.out.println(cUD);
-		modelAndView.setViewName("/public");
-		return modelAndView;
-	}
-
 	@GetMapping("/inscription")
 	public ModelAndView inscription(@RequestParam(name = "source", required = false, defaultValue = "") String source) {
 		return goInscription(new Personne(), "", source);

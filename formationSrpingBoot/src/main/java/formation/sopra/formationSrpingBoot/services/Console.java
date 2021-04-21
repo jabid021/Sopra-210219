@@ -22,7 +22,7 @@ public class Console implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		//initPasswordDataBase();
+		initPasswordDataBase();
 	}
 
 	private void initPasswordDataBase() {

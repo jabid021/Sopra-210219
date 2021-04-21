@@ -16,11 +16,15 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Version;
+import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import formation.sopra.formationSrpingBoot.controllers.rest.Views;
 import formation.sopra.formationSrpingBoot.validators.FormationDansLeFutur;
 
 @Entity
@@ -29,15 +33,22 @@ import formation.sopra.formationSrpingBoot.validators.FormationDansLeFutur;
 @Cacheable
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Formation {
+	@JsonView(Views.Common.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqFormation")
 	private Integer id;
+	@JsonView(Views.Common.class)
+	@NotEmpty
+	@Column(name = "nom")
+	private String nom;
+	@JsonView(Views.Common.class)
 	@Column(name = "date_formation")
 	@FormationDansLeFutur
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dateFormation;
 	@ManyToOne
 	@JoinColumn(name = "id_formateur", foreignKey = @ForeignKey(name = "formation_id_formateur_fk"))
+	@JsonView(Views.Common.class)
 	private Formateur referent;
 	@OneToMany(mappedBy = "id.formation")
 	private Set<ModuleFormation> modules;
@@ -48,10 +59,18 @@ public class Formation {
 
 	}
 
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
 	public Integer getId() {
 		return id;
 	}
-	
+
 	public void setId(Integer id) {
 		this.id = id;
 	}

@@ -39,7 +39,6 @@ public class CustomUserDetails implements UserDetails {
 
 	@Override
 	public boolean isAccountNonExpired() {
-		// je ne traite pas cette fonction=>je renvoie true pour ne pas etre bloque
 		return true;
 	}
 

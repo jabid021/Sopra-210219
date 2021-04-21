@@ -35,8 +35,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		//// @formatter:off
 		http
 			.antMatcher("/**")
+				.csrf().ignoringAntMatchers("/api","/api/**")
+				.and()
 				.authorizeRequests()
-					.antMatchers("/login","/logout", "/public", "/public/**","/anonymous","/error").permitAll()
+					.antMatchers("/login","/logout", "/public", "/public/**","/anonymous","/error","/api","/api/**").permitAll()
 					.antMatchers("/admin","/admin/**").hasAnyRole("ADMIN")
 					.anyRequest().authenticated()
 			.and()
