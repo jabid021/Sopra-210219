@@ -17,21 +17,29 @@ import javax.validation.constraints.NotEmpty;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import formation.sopra.formationSrpingBoot.controllers.rest.Views;
+
 @Entity
 @Table(name = "formateur")
 @Cacheable
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @SequenceGenerator(name = "seqFormateur", sequenceName = "seq_formateur", initialValue = 100, allocationSize = 1)
 public class Formateur {
+	@JsonView(Views.Common.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqFormateur")
 	private Integer id;
+	@JsonView(Views.Common.class)
 	@NotEmpty
 	@Column(name = "prenom", length = 150, nullable = false)
 	private String prenom;
+	@JsonView(Views.Common.class)
 	@Column(name = "nom", length = 150)
 	@NotEmpty
 	private String nom;
+	@JsonView(Views.FormateurAvecFormationReferent.class)
 	@OneToMany(mappedBy = "referent")
 	private Set<Formation> formations;
 	@OneToMany(mappedBy = "intervenant")

@@ -31,8 +31,10 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import formation.sopra.formationSrpingBoot.entities.Formateur;
 import formation.sopra.formationSrpingBoot.entities.Formation;
 import formation.sopra.formationSrpingBoot.exceptions.FormationInvalidException;
+import formation.sopra.formationSrpingBoot.repositories.FormateurRepository;
 import formation.sopra.formationSrpingBoot.repositories.FormationRepository;
 
 @RestController
@@ -42,9 +44,12 @@ public class FormationRestController {
 	@Autowired
 	private FormationRepository formationRepository;
 
+	@Autowired
+	private FormateurRepository formateurRepository;
+
 	// crud
 	// all formations
-	@JsonView(Views.Common.class)
+	@JsonView(Views.FormationAvecReferent.class)
 	@GetMapping("")
 	public List<Formation> allFormation() {
 		return formationRepository.findAll();
@@ -66,7 +71,7 @@ public class FormationRestController {
 //	}
 
 	@PostMapping("")
-	@JsonView(Views.Common.class)
+	@JsonView(Views.FormationAvecReferent.class)
 	public ResponseEntity<Formation> createFormation(@Valid @RequestBody Formation formation, BindingResult br,
 			UriComponentsBuilder uCB) {
 		if (br.hasErrors()) {
@@ -85,7 +90,7 @@ public class FormationRestController {
 	// delete
 
 	// findById
-	@JsonView(Views.Common.class)
+	@JsonView(Views.FormationAvecReferent.class)
 	@GetMapping("/search")
 	public Formation getById(@RequestParam Integer id) {
 		Optional<Formation> opt = formationRepository.findById(id);
@@ -96,7 +101,7 @@ public class FormationRestController {
 
 	}
 
-	@JsonView(Views.Common.class)
+	@JsonView(Views.FormationAvecReferent.class)
 	@GetMapping("/{id}")
 	public Formation getByIdWithPathVarialbe(@PathVariable("id") Integer id) {
 		Optional<Formation> opt = formationRepository.findById(id);
@@ -107,7 +112,7 @@ public class FormationRestController {
 
 	}
 
-	@JsonView(Views.Common.class)
+	@JsonView(Views.FormationAvecReferent.class)
 	@GetMapping("/{id}/search")
 	public Formation getByIdWithPathVarialbeAndRequestParam(@PathVariable("id") Integer id,
 			@RequestParam(name = "nom", required = false) String nom) {
@@ -130,7 +135,7 @@ public class FormationRestController {
 		}
 	}
 
-	@JsonView(Views.Common.class)
+	@JsonView(Views.FormationAvecReferent.class)
 	@PutMapping("/{id}")
 	public Formation update(@Valid @RequestBody Formation formation, BindingResult br, @PathVariable("id") Integer id) {
 		Optional<Formation> opt = formationRepository.findById(id);
@@ -145,7 +150,7 @@ public class FormationRestController {
 	}
 
 	@PatchMapping("/{id}")
-	@JsonView(Views.Common.class)
+	@JsonView(Views.FormationAvecReferent.class)
 	public Formation update(@RequestBody Map<String, Object> attributs, @PathVariable Integer id) {
 		Optional<Formation> opt = formationRepository.findById(id);
 		if (!opt.isPresent()) {
@@ -157,12 +162,29 @@ public class FormationRestController {
 			ReflectionUtils.makeAccessible(field);
 			if (key.equals("dateFormation")) {
 				formation.setDateFormation(LocalDate.parse(value.toString()));
-			} else {
+			}
+			if (key.equals("referent")) {
+				Map<String, Object> map = (Map<String, Object>) value;
+				if (map != null) {
+					if (map.get("id") != null) {
+						Formateur referent = formateurRepository.findById(Integer.parseInt(map.get("id").toString()))
+								.get();
+						formation.setReferent(referent);
+					} else {
+						throw new FormationInvalidException();
+					}
+				} else {
+					ReflectionUtils.setField(field, formation, value);
+				}
+			}
+
+			else {
 				ReflectionUtils.setField(field, formation, value);
 			}
 		});
-		formationRepository.save(formation);
-		return formation;
+
+		return formationRepository.save(formation);
+
 	}
 
 }

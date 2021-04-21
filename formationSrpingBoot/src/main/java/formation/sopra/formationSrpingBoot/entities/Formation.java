@@ -48,7 +48,7 @@ public class Formation {
 	private LocalDate dateFormation;
 	@ManyToOne
 	@JoinColumn(name = "id_formateur", foreignKey = @ForeignKey(name = "formation_id_formateur_fk"))
-	@JsonView(Views.Common.class)
+	@JsonView(Views.FormationAvecReferent.class)
 	private Formateur referent;
 	@OneToMany(mappedBy = "id.formation")
 	private Set<ModuleFormation> modules;

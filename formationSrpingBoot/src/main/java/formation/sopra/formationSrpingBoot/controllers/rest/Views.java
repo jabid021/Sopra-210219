@@ -16,4 +16,12 @@ public class Views {
 	public static class Test extends Common {
 
 	}
+
+	public static class FormateurAvecFormationReferent extends Common {
+
+	}
+
+	public static class FormationAvecReferent extends Common {
+
+	}
 }
