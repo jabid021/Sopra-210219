@@ -1,0 +1,7 @@
+<div>
+  nom:<input [(ngModel)]="produit.nom" /><br />
+  prix:<input [(ngModel)]="produit.prix" />
+</div>
+<div *ngIf="isVisible()" [ngClass]="{ rouge: produit.prix < 0 }">
+  nom:{{ produit.nom }}, prix:{{ produit.prix }}
+</div>
