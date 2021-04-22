@@ -1,0 +1,12 @@
+<p>bonjour {{ olivier.prenom }} {{ olivier.nom }}</p>
+<p>la meme avec une methode {{ olivier.info() }}</p>
+<p>{{ message }}</p>
+<p>{{ methode() }}</p>
+<div>
+  <input [(ngModel)]="olivier.prenom" /> <input [(ngModel)]="olivier.nom" />
+
+  <br />
+  <button (click)="raz()">raz</button>
+  <div style="color: red">une div en couleur</div>
+  <div [style.color]="couleur">une div en couleur gere par angular</div>
+</div>
