@@ -1,0 +1,10 @@
+<div>
+  <select [(ngModel)]="couleur">
+    <option value="#000000">noir</option>
+    <option value="#C70039">rouge</option>
+    <option value="#FFC300">jaune</option>
+    <option value="#229954 ">vert</option></select
+  ><br />
+  <input type="color" [(ngModel)]="couleur" />
+</div>
+<div [style.color]="couleur">du texte en couleur</div>
