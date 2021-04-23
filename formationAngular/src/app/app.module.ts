@@ -14,10 +14,27 @@ import { AscBoldElementComponent } from './asc-bold-element/asc-bold-element.com
 import { AscTooltipsComponent } from './asc-tooltips/asc-tooltips.component';
 import { VoteComponent } from './vote/vote.component';
 import { ClassementComponent } from './classement/classement.component';
+import { RouterModule } from '@angular/router';
+import { routes } from './routes';
+import { BonjourComponent } from './bonjour/bonjour.component';
 
 @NgModule({
-  declarations: [AppComponent, FirstComponent, CouleurComponent, ProduitComponent, DisplayProduitComponent, OutputComponent, Produit2Component, InputProduitComponent, AscBoldElementComponent, AscTooltipsComponent, VoteComponent, ClassementComponent],
-  imports: [BrowserModule, FormsModule],
+  declarations: [
+    AppComponent,
+    FirstComponent,
+    CouleurComponent,
+    ProduitComponent,
+    DisplayProduitComponent,
+    OutputComponent,
+    Produit2Component,
+    InputProduitComponent,
+    AscBoldElementComponent,
+    AscTooltipsComponent,
+    VoteComponent,
+    ClassementComponent,
+    BonjourComponent,
+  ],
+  imports: [BrowserModule, FormsModule, RouterModule.forRoot(routes)],
   providers: [],
   bootstrap: [AppComponent],
 })

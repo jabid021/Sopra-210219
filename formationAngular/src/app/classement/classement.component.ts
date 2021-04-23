@@ -12,6 +12,7 @@ export class ClassementComponent implements OnInit {
     new Personne('toto', 'toto'),
     new Personne('tutu', 'tutu'),
     new Personne('titi', 'titi'),
+    new Personne('tyty', 'tyty'),
   ];
   nbreVote: number = 0;
 

@@ -5,15 +5,8 @@
   </div>
   <div>
     <app-vote
-      [personne]="personnes[0]"
-      (voterEmit)="traitementVote($event)"
-    ></app-vote>
-    <app-vote
-      [personne]="personnes[1]"
-      (voterEmit)="traitementVote($event)"
-    ></app-vote>
-    <app-vote
-      [personne]="personnes[2]"
+      *ngFor="let p of personnes"
+      [personne]="p"
       (voterEmit)="traitementVote($event)"
     ></app-vote>
   </div>

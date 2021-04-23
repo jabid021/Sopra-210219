@@ -1,1 +1,14 @@
-<app-classement></app-classement>
+<div>
+  mon site
+  <nav>
+    <a [routerLink]="['/classement']" routerLinkActive="active">classement</a>
+    <a routerLink="/produit" routerLinkActive="active">produit</a>
+    <a [routerLink]="['/bonjour', 'olivier']" routerLinkActive="active"
+      >bonjour olivier</a
+    >
+    <a [routerLink]="['/bonjour', 'toto']" routerLinkActive="active"
+      >bonjour toto</a
+    >
+  </nav>
+</div>
+<router-outlet></router-outlet>
