@@ -2,3 +2,7 @@
 <input-produit (sendProduit)="getProduit($event)"></input-produit>
 <!--affichage produit-->
 <display-produit [produit]="produit"></display-produit>
+<asc-bold-element
+  prefix="le nom du produit:"
+  [text]="produit.nom"
+></asc-bold-element>

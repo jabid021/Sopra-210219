@@ -1,0 +1,20 @@
+<div>
+  <div>
+    la personne la plus populaire est:<br />
+    {{ best.prenom }} {{ best.nom }} {{ nbreVote }}
+  </div>
+  <div>
+    <app-vote
+      [personne]="personnes[0]"
+      (voterEmit)="traitementVote($event)"
+    ></app-vote>
+    <app-vote
+      [personne]="personnes[1]"
+      (voterEmit)="traitementVote($event)"
+    ></app-vote>
+    <app-vote
+      [personne]="personnes[2]"
+      (voterEmit)="traitementVote($event)"
+    ></app-vote>
+  </div>
+</div>

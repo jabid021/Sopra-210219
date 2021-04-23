@@ -10,9 +10,13 @@ import { DisplayProduitComponent } from './display-produit/display-produit.compo
 import { OutputComponent } from './output/output.component';
 import { Produit2Component } from './produit2/produit2.component';
 import { InputProduitComponent } from './input-produit/input-produit.component';
+import { AscBoldElementComponent } from './asc-bold-element/asc-bold-element.component';
+import { AscTooltipsComponent } from './asc-tooltips/asc-tooltips.component';
+import { VoteComponent } from './vote/vote.component';
+import { ClassementComponent } from './classement/classement.component';
 
 @NgModule({
-  declarations: [AppComponent, FirstComponent, CouleurComponent, ProduitComponent, DisplayProduitComponent, OutputComponent, Produit2Component, InputProduitComponent],
+  declarations: [AppComponent, FirstComponent, CouleurComponent, ProduitComponent, DisplayProduitComponent, OutputComponent, Produit2Component, InputProduitComponent, AscBoldElementComponent, AscTooltipsComponent, VoteComponent, ClassementComponent],
   imports: [BrowserModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
