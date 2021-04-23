@@ -1,7 +1,11 @@
+<app-output (eventSortiePrete)="recuperationEventOutput($event)"></app-output>
+<div>{{ texte }}</div>
+<div><ng-content></ng-content></div>
 <div>
   nom:<input [(ngModel)]="produit.nom" /><br />
   prix:<input [(ngModel)]="produit.prix" />
 </div>
-<div *ngIf="isVisible()" [ngClass]="{ rouge: produit.prix < 0 }">
-  nom:{{ produit.nom }}, prix:{{ produit.prix }}
+<display-produit *ngIf="isVisible()" [produit]="produit"></display-produit>
+<div>
+  <button (click)="click()"><img src="../../assets/tele.jpeg" alt="" /></button>
 </div>

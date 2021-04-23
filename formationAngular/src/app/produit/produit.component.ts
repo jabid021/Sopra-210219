@@ -1,5 +1,5 @@
 import { Produit } from './../model/produit';
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-produit',
@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProduitComponent implements OnInit {
   produit: Produit = new Produit();
+  texte: string = '';
 
   constructor() {}
 
@@ -15,5 +16,18 @@ export class ProduitComponent implements OnInit {
 
   isVisible(): boolean {
     return this.produit.nom !== '' && this.produit.prix != 0 ? true : false;
+  }
+
+  public click(): void {
+    console.log('click');
+  }
+
+  @HostListener('click')
+  public clickOnComponent(): void {
+    console.log('click sur le component');
+  }
+
+  public recuperationEventOutput(param): void {
+    this.texte = param;
   }
 }
