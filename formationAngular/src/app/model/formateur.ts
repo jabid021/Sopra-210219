@@ -27,4 +27,7 @@ export class Formateur {
   public set nom(value: string) {
     this._nom = value;
   }
+  public infos(): string {
+    return `${this.prenom} ${this.nom}`;
+  }
 }

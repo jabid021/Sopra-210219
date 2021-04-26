@@ -1,0 +1,35 @@
+<div>
+  <h1>liste des formations</h1>
+  <table class="table">
+    <tr *ngFor="let formation of formations | async">
+      <td>{{ formation.id }}</td>
+      <td>{{ formation.nom }}</td>
+      <td>{{ formation.dateFormation | date: "dd/MM/yyyy" }}</td>
+      <td>
+        <ng-container *ngIf="!!formation.referent">
+          {{ formation.referent.prenom }}
+          {{ formation.referent.nom }}</ng-container
+        >
+      </td>
+      <td>
+        <a
+          class="btn btn-outline-info"
+          [routerLink]="['/formation', 'edit', formation.id]"
+          routerLinkActive="active"
+          >editer</a
+        >
+      </td>
+      <td>
+        <button (click)="delete(formation.id)" class="btn btn-outline-danger">
+          supprimer
+        </button>
+      </td>
+    </tr>
+  </table>
+  <a
+    class="btn btn-link"
+    [routerLink]="['/formation', 'edit']"
+    routerLinkActive="active"
+    >creation formation</a
+  >
+</div>

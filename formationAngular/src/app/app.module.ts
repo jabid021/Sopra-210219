@@ -22,6 +22,8 @@ import { TestPipe } from './pipe/test.pipe';
 import { HttpClientModule } from '@angular/common/http';
 import { FormateurListComponent } from './formateur/formateur-list/formateur-list.component';
 import { FormateurEditComponent } from './formateur/formateur-edit/formateur-edit.component';
+import { FormationListComponent } from './formation/formation-list/formation-list.component';
+import { FormationEditComponent } from './formation/formation-edit/formation-edit.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,8 @@ import { FormateurEditComponent } from './formateur/formateur-edit/formateur-edi
     TestPipe,
     FormateurListComponent,
     FormateurEditComponent,
+    FormationListComponent,
+    FormationEditComponent,
   ],
   imports: [
     BrowserModule,
