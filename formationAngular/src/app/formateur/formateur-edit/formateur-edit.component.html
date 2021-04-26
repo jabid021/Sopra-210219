@@ -1,0 +1,23 @@
+<div>
+  <h1>edition formateur</h1>
+  <div>
+    <div class="form-group">
+      <label for="id">id:</label>
+      <input id="id" [(ngModel)]="formateur.id" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+      <label for="prenom">prenom:</label>
+      <input id="prenom" [(ngModel)]="formateur.prenom" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="nom">nom:</label>
+      <input id="nom" [(ngModel)]="formateur.nom" class="form-control" />
+    </div>
+    <div class="form-group">
+      <button (click)="save()" class="btn btn-outline-success">
+        enregistrer
+      </button>
+      <a class="btn btn-outline-warning" routerLink="/formateur">annuler</a>
+    </div>
+  </div>
+</div>

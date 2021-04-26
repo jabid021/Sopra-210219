@@ -1,3 +1,4 @@
+import { TestService } from './services/test.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -17,6 +18,10 @@ import { ClassementComponent } from './classement/classement.component';
 import { RouterModule } from '@angular/router';
 import { routes } from './routes';
 import { BonjourComponent } from './bonjour/bonjour.component';
+import { TestPipe } from './pipe/test.pipe';
+import { HttpClientModule } from '@angular/common/http';
+import { FormateurListComponent } from './formateur/formateur-list/formateur-list.component';
+import { FormateurEditComponent } from './formateur/formateur-edit/formateur-edit.component';
 
 @NgModule({
   declarations: [
@@ -33,9 +38,17 @@ import { BonjourComponent } from './bonjour/bonjour.component';
     VoteComponent,
     ClassementComponent,
     BonjourComponent,
+    TestPipe,
+    FormateurListComponent,
+    FormateurEditComponent,
   ],
-  imports: [BrowserModule, FormsModule, RouterModule.forRoot(routes)],
-  providers: [],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    FormsModule,
+    RouterModule.forRoot(routes),
+  ],
+  providers: [TestService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

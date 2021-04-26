@@ -1,3 +1,4 @@
+import { TestService } from './../services/test.service';
 import { Produit } from './../model/produit';
 import { Component, OnInit } from '@angular/core';
 
@@ -8,8 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Produit2Component implements OnInit {
   produit: Produit = new Produit();
-
-  constructor() {}
+  message = '';
+  constructor(private hello: TestService) {
+    this.message = hello.helloDuService();
+  }
 
   ngOnInit(): void {}
 
