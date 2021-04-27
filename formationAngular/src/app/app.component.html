@@ -5,10 +5,14 @@
     <a class="btn btn-link" routerLink="/home" routerLinkActive="active"
       >accueil</a
     >
+    <a class="btn btn-link" routerLink="/formulaire" routerLinkActive="active"
+      >formulaire</a
+    >
     <ng-container *ngIf="!login; else auth">
       <a class="btn btn-link" routerLink="/login" routerLinkActive="active"
         >login</a
       >
+      <a class="btn btn-link" routerLink="/inscription" routerLinkActive="active">inscription</a>
     </ng-container>
 
     <ng-template #auth>

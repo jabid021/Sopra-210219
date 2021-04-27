@@ -1,0 +1,68 @@
+<div>
+  <h1>inscription</h1>
+  <form (ngSubmit)="send()" [formGroup]="form">
+    <div class="form-group">
+      <label>login:</label>
+      <input
+        name="login"
+        class="form-control"
+        placeholder="votre login"
+        [formControl]="loginCtrl"
+      />
+      <div class="alert alert-danger" *ngIf="loginIsInvalid()">
+        <span *ngIf="loginCtrl.hasError('required')"> login obligatoire </span>
+        <span *ngIf="loginCtrl.hasError('loginExist')">
+          login indisponible
+        </span>
+        <span *ngIf="loginCtrl.hasError('minlength')">
+          3 caracteres minimum
+        </span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>mot de passe:</label>
+      <input
+        type="password"
+        name="password"
+        class="form-control"
+        placeholder="******"
+        [formControl]="passwordCtrl"
+      />
+      <div class="alert alert-danger" *ngIf="passwordIsInvalid()">
+        <span *ngIf="passwordCtrl.hasError('required')">
+          mot de passe obligatoire
+        </span>
+        <span *ngIf="passwordCtrl.hasError('pattern')">
+          mot de passe de 3 caracteres avec 1 nombre et 1 lettre obligatoire
+        </span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>confirmer votre mot de passe:</label>
+      <input
+        type="password"
+        name="confirmation"
+        class="form-control"
+        placeholder="******"
+        [formControl]="confirmationCtrl"
+      />
+      <div class="alert alert-danger" *ngIf="passwordGroupIsInvalid()">
+        les 2 mots de passes ne sont pas identiques
+      </div>
+    </div>
+    <div class="form-group">
+      <button
+        type="submit"
+        class="btn btn-outline-primary"
+        [disabled]="form.invalid"
+      >
+        enregistrer</button
+      ><a
+        routerLink="/home"
+        routerLinkActive="active"
+        class="btn btn-outline-warning"
+        >annuler</a
+      >
+    </div>
+  </form>
+</div>

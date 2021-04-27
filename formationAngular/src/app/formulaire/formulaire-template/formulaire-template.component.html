@@ -1,0 +1,30 @@
+<div>
+  <form (ngSubmit)="submit()" #monForm="ngForm">
+    <div class="form-group">
+      <label>nom:</label>
+      <input
+        name="nom"
+        class="form-control"
+        required
+        [(ngModel)]="produit.nom"
+        #nomInput="ngModel"
+      />
+      <div
+        *ngIf="nomInput.dirty && nomInput.invalid"
+        class="alert alert-danger"
+      >
+        contenu obligatoire
+      </div>
+    </div>
+    <div class="form-group">
+      <label>prix:</label>
+      <input
+        type="number"
+        name="prix"
+        class="form-control"
+        [(ngModel)]="produit.prix"
+      />
+    </div>
+    <button type="submit" [disabled]="monForm.invalid">envoyer</button>
+  </form>
+</div>

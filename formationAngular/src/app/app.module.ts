@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { FirstComponent } from './first/first.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CouleurComponent } from './couleur/couleur.component';
 import { ProduitComponent } from './produit/produit.component';
 import { DisplayProduitComponent } from './display-produit/display-produit.component';
@@ -27,6 +27,9 @@ import { FormationEditComponent } from './formation/formation-edit/formation-edi
 import { LoginComponent } from './auth/login/login.component';
 import { HomeComponent } from './home/home.component';
 import { PageIntrouvableComponent } from './page-introuvable/page-introuvable.component';
+import { FormulaireTemplateComponent } from './formulaire/formulaire-template/formulaire-template.component';
+import { FormulaireCodeComponent } from './formulaire/formulaire-code/formulaire-code.component';
+import { InscriptionComponent } from './formulaire/inscription/inscription.component';
 
 @NgModule({
   declarations: [
@@ -51,11 +54,15 @@ import { PageIntrouvableComponent } from './page-introuvable/page-introuvable.co
     LoginComponent,
     HomeComponent,
     PageIntrouvableComponent,
+    FormulaireTemplateComponent,
+    FormulaireCodeComponent,
+    InscriptionComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(routes),
   ],
   providers: [TestService],

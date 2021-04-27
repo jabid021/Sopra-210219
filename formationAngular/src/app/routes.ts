@@ -1,3 +1,5 @@
+import { InscriptionComponent } from './formulaire/inscription/inscription.component';
+import { FormulaireTemplateComponent } from './formulaire/formulaire-template/formulaire-template.component';
 import { PageIntrouvableComponent } from './page-introuvable/page-introuvable.component';
 import { CanActivateService } from './services/can-activate.service';
 import { HomeComponent } from './home/home.component';
@@ -10,6 +12,7 @@ import { Produit2Component } from './produit2/produit2.component';
 import { ClassementComponent } from './classement/classement.component';
 import { Routes } from '@angular/router';
 import { FormationEditComponent } from './formation/formation-edit/formation-edit.component';
+import { FormulaireCodeComponent } from './formulaire/formulaire-code/formulaire-code.component';
 
 export const routes: Routes = [
   { path: 'classement', component: ClassementComponent },
@@ -48,5 +51,7 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'formulaire', component: FormulaireCodeComponent },
+  { path: 'inscription', component: InscriptionComponent },
   { path: '**', component: PageIntrouvableComponent },
 ];

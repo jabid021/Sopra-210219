@@ -1,0 +1,33 @@
+<div>
+  <form (ngSubmit)="submit()" [formGroup]="form">
+    <div class="form-group">
+      <label>nom:</label>
+      <input name="nom" class="form-control" [formControl]="nomCtrl" />
+      <div *ngIf="nomCtrl.dirty && nomCtrl.invalid" class="alert alert-danger">
+        <span *ngIf="nomCtrl.hasError('required')"> valeur obligatoire </span>
+        <span *ngIf="nomCtrl.hasError('minlength')">
+          3 caracteres minimum
+        </span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>prix:</label>
+      <input
+        type="number"
+        name="prix"
+        class="form-control"
+        [formControl]="prixCtrl"
+      />
+      <div
+        *ngIf="prixCtrl.dirty && prixCtrl.invalid"
+        class="alert alert-danger"
+      >
+        <span *ngIf="prixCtrl.hasError('required')"> valeur obligatoire </span>
+        <span *ngIf="prixCtrl.hasError('modulo10')">
+          le prix doit etre un modulo de 10
+        </span>
+      </div>
+    </div>
+    <button type="submit" [disabled]="form.invalid">envoyer</button>
+  </form>
+</div>
