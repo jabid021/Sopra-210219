@@ -24,6 +24,9 @@ import { FormateurListComponent } from './formateur/formateur-list/formateur-lis
 import { FormateurEditComponent } from './formateur/formateur-edit/formateur-edit.component';
 import { FormationListComponent } from './formation/formation-list/formation-list.component';
 import { FormationEditComponent } from './formation/formation-edit/formation-edit.component';
+import { LoginComponent } from './auth/login/login.component';
+import { HomeComponent } from './home/home.component';
+import { PageIntrouvableComponent } from './page-introuvable/page-introuvable.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +48,9 @@ import { FormationEditComponent } from './formation/formation-edit/formation-edi
     FormateurEditComponent,
     FormationListComponent,
     FormationEditComponent,
+    LoginComponent,
+    HomeComponent,
+    PageIntrouvableComponent,
   ],
   imports: [
     BrowserModule,

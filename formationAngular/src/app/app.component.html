@@ -1,33 +1,25 @@
 <div>
   mon site
   <nav>
-    <a class="btn btn-link" routerLink="/formateur" routerLinkActive="active"
-      >formateur</a
+    <ng-container *ngIf="login">Bonjour {{ login }}</ng-container>
+    <a class="btn btn-link" routerLink="/home" routerLinkActive="active"
+      >accueil</a
     >
-    <a class="btn btn-link" routerLink="/formation" routerLinkActive="active"
-      >formation</a
-    >
-    <a
-      class="btn btn-link"
-      [routerLink]="['/classement']"
-      routerLinkActive="active"
-      >classement</a
-    >
-    <a class="btn btn-link" routerLink="/produit" routerLinkActive="active"
-      >produit</a
-    >
-    <a
-      class="btn btn-link"
-      [routerLink]="['/bonjour', 'olivier']"
-      routerLinkActive="active"
-      >bonjour olivier</a
-    >
-    <a
-      class="btn btn-link"
-      [routerLink]="['/bonjour', 'toto']"
-      routerLinkActive="active"
-      >bonjour toto</a
-    >
+    <ng-container *ngIf="!login; else auth">
+      <a class="btn btn-link" routerLink="/login" routerLinkActive="active"
+        >login</a
+      >
+    </ng-container>
+
+    <ng-template #auth>
+      <a class="btn btn-link" routerLink="/formateur" routerLinkActive="active"
+        >formateur</a
+      >
+      <a class="btn btn-link" routerLink="/formation" routerLinkActive="active"
+        >formation</a
+      >
+      <button class="btn btn-link" (click)="logout()">deconnexion</button>
+    </ng-template>
   </nav>
 </div>
 <router-outlet></router-outlet>

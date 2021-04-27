@@ -1,3 +1,7 @@
+import { PageIntrouvableComponent } from './page-introuvable/page-introuvable.component';
+import { CanActivateService } from './services/can-activate.service';
+import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './auth/login/login.component';
 import { FormationListComponent } from './formation/formation-list/formation-list.component';
 import { FormateurEditComponent } from './formateur/formateur-edit/formateur-edit.component';
 import { FormateurListComponent } from './formateur/formateur-list/formateur-list.component';
@@ -11,10 +15,38 @@ export const routes: Routes = [
   { path: 'classement', component: ClassementComponent },
   { path: 'produit', component: Produit2Component },
   { path: 'bonjour/:prenom', component: BonjourComponent },
-  { path: 'formateur', component: FormateurListComponent },
-  { path: 'formateur/edit', component: FormateurEditComponent },
-  { path: 'formateur/edit/:id', component: FormateurEditComponent },
-  { path: 'formation', component: FormationListComponent },
-  { path: 'formation/edit', component: FormationEditComponent },
-  { path: 'formation/edit/:id', component: FormationEditComponent },
+  {
+    path: 'formateur',
+    component: FormateurListComponent,
+    canActivate: [CanActivateService],
+  },
+  {
+    path: 'formateur/edit',
+    component: FormateurEditComponent,
+    canActivate: [CanActivateService],
+  },
+  {
+    path: 'formateur/edit/:id',
+    component: FormateurEditComponent,
+    canActivate: [CanActivateService],
+  },
+  {
+    path: 'formation',
+    component: FormationListComponent,
+    canActivate: [CanActivateService],
+  },
+  {
+    path: 'formation/edit',
+    component: FormationEditComponent,
+    canActivate: [CanActivateService],
+  },
+  {
+    path: 'formation/edit/:id',
+    component: FormationEditComponent,
+    canActivate: [CanActivateService],
+  },
+  { path: 'login', component: LoginComponent },
+  { path: 'home', component: HomeComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '**', component: PageIntrouvableComponent },
 ];

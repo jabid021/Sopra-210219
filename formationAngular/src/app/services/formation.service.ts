@@ -1,6 +1,6 @@
 import { Formation } from './../model/formation';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -8,30 +8,51 @@ import { Injectable } from '@angular/core';
 })
 export class FormationService {
   private static URL = 'http://127.0.0.1:8080/projet/api/formation';
+  private httpHeaders: HttpHeaders;
+  constructor(private http: HttpClient) {
+    this.initHeader();
+  }
 
-  constructor(private http: HttpClient) {}
+  private initHeader() {
+    this.httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Basic ${localStorage.getItem('auth')}`,
+    });
+  }
 
   public list(): Observable<Formation[]> {
-    return this.http.get<Formation[]>(FormationService.URL);
+    this.initHeader();
+    return this.http.get<Formation[]>(FormationService.URL, {
+      headers: this.httpHeaders,
+    });
   }
 
   public get(id: number): Observable<Formation> {
-    return this.http.get<Formation>(`${FormationService.URL}/${id}`);
+    this.initHeader();
+    return this.http.get<Formation>(`${FormationService.URL}/${id}`, {
+      headers: this.httpHeaders,
+    });
   }
 
   public delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${FormationService.URL}/${id}`);
+    this.initHeader();
+    return this.http.delete<void>(`${FormationService.URL}/${id}`, {
+      headers: this.httpHeaders,
+    });
   }
 
   public update(formation: Formation): Observable<Formation> {
+    this.initHeader();
     console.log(formation.referent.id);
     return this.http.put<Formation>(
       `${FormationService.URL}/${formation.id}`,
-      formation
+      formation,
+      { headers: this.httpHeaders }
     );
   }
 
   public insert(formation: Formation): Observable<Formation> {
+    this.initHeader();
     const f = {
       id: formation.id,
       nom: formation.nom,
@@ -42,6 +63,8 @@ export class FormationService {
         nom: formation.referent.nom,
       },
     };
-    return this.http.post<Formation>(FormationService.URL, f);
+    return this.http.post<Formation>(FormationService.URL, f, {
+      headers: this.httpHeaders,
+    });
   }
 }
