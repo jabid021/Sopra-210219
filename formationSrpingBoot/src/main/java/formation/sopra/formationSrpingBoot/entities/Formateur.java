@@ -26,6 +26,7 @@ import formation.sopra.formationSrpingBoot.controllers.rest.Views;
 @Cacheable
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @SequenceGenerator(name = "seqFormateur", sequenceName = "seq_formateur", initialValue = 100, allocationSize = 1)
+//@JsonIdentityInfo pour les references circulaire
 public class Formateur {
 	@JsonView(Views.Common.class)
 	@Id
